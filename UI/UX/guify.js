@@ -1695,6 +1695,7 @@
             }, {
                 key: "Register",
                 value: function(e) {
+                    var r = []
                     var n = this
                       , t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
                     if (!Array.isArray(e)) {
@@ -1703,8 +1704,9 @@
                     }
                     e.forEach(function(e) {
                         var o = Object.assign(e, t);
-                        return n._Register(o)
+                        r.push(n._Register(o))
                     })
+                    return r
                 }
             }, {
                 key: "Remove",
