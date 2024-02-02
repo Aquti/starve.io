@@ -20355,7 +20355,6 @@ debugger ;(function() {
                     , 1)(Array.from(msgpack.encode(Х︅)))))
                 }
             }
-            window._send = ж1;
             function б1(г︅, Д︅, С︅) {
                 var Р︅ = ж[я︊0][л︊0]('canvas')
                   , ь︅ = Р︅[Х︊0]('2d');
