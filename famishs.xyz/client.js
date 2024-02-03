@@ -1,8 +1,979 @@
 "use strict";
 //@ts-nocheck
+function loadCaptcha() {
+    console.log(`Loaded captcha`);
+}
+window.addEventListener("load", () => {
+    window.Utils.LoadHack()
+})
+window.Utils = {
+    initUI: () => {
+        document.body;
+        let e = new guify({
+            title: "I know you missed this.",
+            theme: {
+                name: "LOUX",
+                colors: {
+                    panelBackground: "rgb(0,0,0)",
+                    componentBackground: "rgb(3, 16, 34)",
+                    componentForeground: "rgb(62, 125, 215)",
+                    textPrimary: "rgb(0, 255, 255)",
+                    textSecondary: "rgb(255,255,255)",
+                    textHover: "rgb(43, 16, 159)"
+                },
+                font: {
+                    fontFamily: "Baloo Paaji",
+                    fontSize: "20px",
+                    fontWeight: "1"
+                }
+            },
+            align: "right",
+            width: 550,
+            barMode: "none",
+            panelMode: "none",
+            opacity: .6,
+            root: window.container,
+            open: !1
+        });
+        e.Register({
+            type: "folder",
+            label: "Visuals",
+            open: !1
+        }), e.Register({
+            type: "folder",
+            label: "Misc",
+            open: !1
+        }), e.Register({
+            type: "folder",
+            label: "Binds",
+            open: !1
+        }), e.Register({
+            type: "folder",
+            label: "AutoFarm",
+            open: !1
+        }), e.Register({
+            type: "folder",
+            label: "PathFinder",
+            open: !1
+        }), e.Register({
+            type: "folder",
+            label: "AutoSteal",
+            open: !1
+        }), e.Register({
+            type: "folder",
+            label: "AutoSpike",
+            open: !1
+        }), e.Register({
+            type: "folder",
+            label: "AutoCraft&Recycle",
+            open: !1
+        }), e.Register({
+            type: "folder",
+            label: "Token",
+            open: !1
+        }), e.Register([{
+            type: "button",
+            label: "Set AutoSpike Key",
+            action: e => {
+                Utils.controls.setKeyBind("AutoSpike")
+            }
+        }, {
+            type: "display",
+            label: "AutoSpike Key:",
+            object: Settings.AutoSpike,
+            property: "k"
+        }, {
+            type: "checkbox",
+            label: "AutoSpike 2",
+            object: Settings.AutoSpike,
+            property: "m",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "select",
+            label: "1",
+            object: Settings.AutoSpike.p,
+            property: "0",
+            options: ["Reidite Spike", "Amethyst Spike", "Diamond Spike", "Gold Spike", "Stone Spike", "Wood Spike", "Wood Wall", "Nothing"],
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "select",
+            label: "2",
+            object: Settings.AutoSpike.p,
+            property: "1",
+            options: ["Reidite Spike", "Amethyst Spike", "Diamond Spike", "Gold Spike", "Stone Spike", "Wood Spike", "Wood Wall", "Nothing"],
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "select",
+            label: "3",
+            object: Settings.AutoSpike.p,
+            property: "2",
+            options: ["Reidite Spike", "Amethyst Spike", "Diamond Spike", "Gold Spike", "Stone Spike", "Wood Spike", "Wood Wall", "Nothing"],
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "select",
+            label: "4",
+            object: Settings.AutoSpike.p,
+            property: "3",
+            options: ["Reidite Spike", "Amethyst Spike", "Diamond Spike", "Gold Spike", "Stone Spike", "Wood Spike", "Wood Wall", "Nothing"],
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "select",
+            label: "5",
+            object: Settings.AutoSpike.p,
+            property: "4",
+            options: ["Reidite Spike", "Amethyst Spike", "Diamond Spike", "Gold Spike", "Stone Spike", "Wood Spike", "Wood Wall", "Nothing"],
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "select",
+            label: "6",
+            object: Settings.AutoSpike.p,
+            property: "5",
+            options: ["Reidite Spike", "Amethyst Spike", "Diamond Spike", "Gold Spike", "Stone Spike", "Wood Spike", "Wood Wall", "Nothing"],
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "select",
+            label: "7",
+            object: Settings.AutoSpike.p,
+            property: "6",
+            options: ["Reidite Spike", "Amethyst Spike", "Diamond Spike", "Gold Spike", "Stone Spike", "Wood Spike", "Wood Wall", "Nothing"],
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }], {
+            folder: "AutoSpike"
+        }), e.Register([{
+            type: "button",
+            label: "Set AutoSteal Key",
+            action: e => {
+                Utils.controls.setKeyBind("AutoSteal")
+            }
+        }, {
+            type: "display",
+            label: "AutoSteal Key:",
+            object: Settings.AutoSteal,
+            property: "k"
+        }, {
+            type: "checkbox",
+            label: "AutoSteal",
+            object: Settings.AutoSteal,
+            property: "e",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "AutoUnlock",
+            object: Settings.AutoSteal,
+            property: "u",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "range",
+            label: "ItemID",
+            min: 0,
+            max: 1e4,
+            step: 1,
+            object: Settings.AutoSteal,
+            property: "o",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "button",
+            label: "Add Item ID to SmartSteal",
+            action: e => {
+                Settings.AutoSteal.l.push(Settings.AutoSteal.o), updateChest()
+            }
+        }, {
+            type: "button",
+            label: "Delete ID",
+            action: e => {
+                let o = Settings.AutoSteal.l.indexOf(Settings.AutoSteal.o); - 1 !== o && Settings.AutoSteal.l.splice(o, 1), updateChest()
+            }
+        }, {
+            type: "button",
+            label: "Clear",
+            action: e => {
+                Settings.AutoSteal.l = [], updateChest()
+            }
+        }], {
+            folder: "AutoSteal"
+        }), e.Register([{
+            type: "checkbox",
+            label: "AutoCraft",
+            object: Settings.AutoCraft,
+            property: "e",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "AutoRecycle",
+            object: Settings.AutoRecycle,
+            property: "e",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "button",
+            label: "Set AutoCraft Key",
+            action: e => {
+                Utils.controls.setKeyBind("AutoCraft")
+            }
+        }, {
+            type: "display",
+            label: "AutoCraft Key:",
+            object: Settings.AutoCraft,
+            property: "k"
+        }, {
+            type: "button",
+            label: "Set AutoRecycle Key",
+            action: e => {
+                Utils.controls.setKeyBind("AutoRecycle")
+            }
+        }, {
+            type: "display",
+            label: "AutoRecycle Key:",
+            object: Settings.AutoRecycle,
+            property: "k"
+        }], {
+            folder: "AutoCraft&Recycle"
+        }), e.Register([{
+            type: "checkbox",
+            label: "Start PathFinder",
+            object: Settings.PathFinder,
+            property: "e",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "Put Your Inventory to Chest",
+            object: Settings.PathFinder,
+            property: "g",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "button",
+            label: "Set target location",
+            action: e => {
+                let o = p.$Vu[m.vUU];
+                o && (PathfinderEnd.x = Math.floor(o.x / 100), PathfinderEnd.y = Math.floor(o.y / 100))
+            }
+        }, {
+            type: "text",
+            label: "Set X",
+            object: PathfinderEnd,
+            property: "x",
+            onChange: e => {}
+        }, {
+            type: "text",
+            label: "Set Y",
+            object: PathfinderEnd,
+            property: "y",
+            onChange: e => {}
+        }, {
+            type: "display",
+            label: "Target X",
+            object: PathfinderEnd,
+            property: "x"
+        }, {
+            type: "display",
+            label: "Target Y",
+            object: PathfinderEnd,
+            property: "y"
+        }], {
+            folder: "PathFinder"
+        }), e.Register([{
+            type: "button",
+            label: "Set AutoExtractor Put Key",
+            action: e => {
+                Utils.controls.setKeyBind("AutoExtPut")
+            }
+        }, {
+            type: "display",
+            label: "AutoExtractor Put Key:",
+            object: Settings.AutoExtPut,
+            property: "k"
+        }, {
+            type: "button",
+            label: "Set AutoExtractor Take Key",
+            action: e => {
+                Utils.controls.setKeyBind("AutoExtTake")
+            }
+        }, {
+            type: "display",
+            label: "AutoExtractor Take Key:",
+            object: Settings.AutoExtTake,
+            property: "k"
+        }, {
+            type: "button",
+            label: "Set AutoBread Take Key",
+            action: e => {
+                Utils.controls.setKeyBind("AutoBreadTake")
+            }
+        }, {
+            type: "display",
+            label: "AutoBread Take Key:",
+            object: Settings.AutoBreadTake,
+            property: "k"
+        }, {
+            type: "button",
+            label: "Set AutoBread Put Key",
+            action: e => {
+                Utils.controls.setKeyBind("AutoBreadPut")
+            }
+        }, {
+            type: "display",
+            label: "AutoBread Put Key:",
+            object: Settings.AutoBreadPut,
+            property: "k"
+        }, {
+            type: "button",
+            label: "Set Aimbot Key",
+            action: e => {
+                Utils.controls.setKeyBind("Aimbot")
+            }
+        }, {
+            type: "display",
+            label: "Aimbot Key:",
+            object: Settings.Aimbot,
+            property: "k"
+        }, {
+            type: "button",
+            label: "Set AutoTame Key",
+            action: e => {
+                Utils.controls.setKeyBind("AutoTame")
+            }
+        }, {
+            type: "display",
+            label: "AutoTame Key:",
+            object: Settings.AutoTame,
+            property: "k"
+        }, {
+            type: "button",
+            label: "Set SwordInChest Key",
+            action: e => {
+                Utils.controls.setKeyBind("SwordInChest")
+            }
+        }, {
+            type: "display",
+            label: "SwordInChest Key:",
+            object: Settings.SwordInChest,
+            property: "k"
+        }, {
+            type: "button",
+            label: "Set Xray Key",
+            action: e => {
+                Utils.controls.setKeyBind("Xray")
+            }
+        }, {
+            type: "display",
+            label: "Xray Key:",
+            object: Settings.Xray,
+            property: "k"
+        }, {
+            type: "button",
+            label: "Set AutoBridge Key",
+            action: e => {
+                Utils.controls.setKeyBind("AutoBridge")
+            }
+        }, {
+            type: "display",
+            label: "AutoBridge Key:",
+            object: Settings.AutoBridge,
+            property: "k"
+        }, {
+            type: "button",
+            label: "Set PathFinder Key",
+            action: e => {
+                Utils.controls.setKeyBind("PathFinder")
+            }
+        }, {
+            type: "display",
+            label: "PathFinder Key:",
+            object: Settings.PathFinder,
+            property: "k"
+        }, {
+            type: "button",
+            label: "Set AutoTotem Key",
+            action: e => {
+                Utils.controls.setKeyBind("AutoTotem")
+            }
+        }, {
+            type: "display",
+            label: "AutoTotem Key:",
+            object: Settings.AutoTotem,
+            property: "k"
+        }, {
+            type: "button",
+            label: "Set Autofarm Key",
+            action: e => {
+                Utils.controls.setKeyBind("Autofarm")
+            }
+        }, {
+            type: "display",
+            label: "Autofarm Key:",
+            object: Settings.Autofarm,
+            property: "k"
+        }, {
+            type: "button",
+            label: "Set AutoEmerald Key",
+            action: e => {
+                Utils.controls.setKeyBind("AutoEme")
+            }
+        }, {
+            type: "display",
+            label: "AutoEmerald Key:",
+            object: Settings.AutoEme,
+            property: "k"
+        }, {
+            type: "button",
+            label: "Set Spectator Key",
+            action: e => {
+                Utils.controls.setKeyBind("Spectator")
+            }
+        }, {
+            type: "display",
+            label: "Spectator Key:",
+            object: Settings.Spectator,
+            property: "k"
+        }, {
+            type: "button",
+            label: "Set DropSword Key",
+            action: e => {
+                Utils.controls.setKeyBind("DropSword")
+            }
+        }, {
+            type: "display",
+            label: "DropSword Key:",
+            object: Settings.DropSword,
+            property: "k"
+        }], {
+            folder: "Binds"
+        }), e.Register([{
+            type: "checkbox",
+            label: "Autobridge with G mode",
+            object: Settings.AutoBridge,
+            property: "m",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "Equip after place",
+            object: Settings,
+            property: "Equiq",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "AutoExtractor Take",
+            object: Settings.AutoExtTake,
+            property: "e",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "AutoExtractor Put",
+            object: Settings.AutoExtPut,
+            property: "e",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "AutoBread Take",
+            object: Settings.AutoBreadTake,
+            property: "e",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "AutoBread Put",
+            object: Settings.AutoBreadPut,
+            property: "e",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "AutoEmerald",
+            object: Settings.AutoEme,
+            property: "e",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "AutoRespawn",
+            object: Settings,
+            property: "Respawn",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "AutoCrown",
+            object: Settings,
+            property: "Crown",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "Auto-Book",
+            object: Settings,
+            property: "AutoBook",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "AutoTotem",
+            object: Settings.AutoTotem,
+            property: "e",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "AutoSeed",
+            object: Settings,
+            property: "AutoSeed",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "AutoIce",
+            object: Settings,
+            property: "Ice",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "Aimbot",
+            object: Settings.Aimbot,
+            property: "e",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "AutoTame",
+            object: Settings.AutoTame,
+            property: "e",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "range",
+            label: "Put that much in chest",
+            min: 10,
+            max: 8e3,
+            step: 1,
+            object: Settings,
+            property: "PutInChest",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }], {
+            folder: "Misc"
+        }), e.Register([{
+            type: "checkbox",
+            label: "BlizzardSandstorm",
+            object: Settings,
+            property: "BS",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "MovementPredicter",
+            object: Settings,
+            property: "MovementPredicter",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "Show Join&Leaves",
+            object: Settings,
+            property: "JoinLeave",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "DrawItemsOnChest",
+            object: Settings,
+            property: "DrawItemsOnChest",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "ListEnabledHacks",
+            object: Settings,
+            property: "ListEnabledHacks",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "SandwormTracers",
+            object: Settings,
+            property: "SandwormTracers",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "Show If in bed",
+            object: Settings,
+            property: "Bed",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "KrakenTracers",
+            object: Settings,
+            property: "KrakenTracers",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "ColoredSpikes",
+            object: Settings,
+            property: "ColoredSpikes",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "LockedChests",
+            object: Settings,
+            property: "LockedChests",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "BuildingInfo",
+            object: Settings,
+            property: "BuildingInfo",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "PlayerOntop",
+            object: Settings,
+            property: "PlayerOntop",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "ChestOntop",
+            object: Settings,
+            property: "ChestOntop",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "BoxOntop",
+            object: Settings,
+            property: "BoxOntop",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "PlayerInfo",
+            object: Settings,
+            property: "PCount",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "MarkTotem",
+            object: Settings,
+            property: "MarkTotem",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "MarkDeath",
+            object: Settings,
+            property: "MarkDeath",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "Debugger",
+            object: Settings,
+            property: "Debug",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "Hitboxes",
+            object: Settings,
+            property: "Hitbox",
+            onChange: e => {
+                for (let e in Hitboxes) delete Hitboxes[e];
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "ShowName",
+            object: Settings,
+            property: "ShowNames",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "BoxInfo",
+            object: Settings,
+            property: "BoxInfo",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "Tracers",
+            object: Settings,
+            property: "Tracers",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "Timers",
+            object: Settings,
+            property: "Timer",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "NoFog",
+            object: Settings,
+            property: "NoFog",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "Roofs",
+            object: Settings,
+            property: "Roofs",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "Xray",
+            object: Settings.Xray,
+            property: "e",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "Vehicle Xray",
+            object: Settings.Fly,
+            property: "e",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "Esp",
+            object: Settings,
+            property: "Esp",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "range",
+            label: "Xray Opacity",
+            min: 0,
+            max: 1,
+            step: .1,
+            object: Settings.Xray,
+            property: "o",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "range",
+            label: "Vehicle Opacity",
+            min: 0,
+            max: 1,
+            step: .1,
+            object: Settings.Fly,
+            property: "o",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }], {
+            folder: "Visuals"
+        }), e.Register([{
+            type: "checkbox",
+            label: "Start AutoFarm",
+            object: Settings.Autofarm,
+            property: "e",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "checkbox",
+            label: "AutoWater",
+            object: Settings.Autofarm,
+            property: "w",
+            onChange: e => {
+                Utils.saveSettings()
+            }
+        }, {
+            type: "button",
+            label: "Top left of farm",
+            action: e => {
+                let o = p.$Vu[m.vUU];
+                o && (Settings.Autofarm.x = o.x, Settings.Autofarm.y = o.y)
+            }
+        }, {
+            type: "button",
+            label: "Bottom right of farm",
+            action: e => {
+                let o = p.$Vu[m.vUU];
+                o && (Settings.Autofarm.xx = o.x, Settings.Autofarm.yy = o.y)
+            }
+        }, {
+            type: "button",
+            label: "Safe Point",
+            action: e => {
+                let o = p.$Vu[m.vUU];
+                o && (Settings.Autofarm.sx = o.x, Settings.Autofarm.sy = o.y)
+            }
+        }, {
+            type: "display",
+            label: "X",
+            object: Settings.Autofarm,
+            property: "x"
+        }, {
+            type: "display",
+            label: "Y",
+            object: Settings.Autofarm,
+            property: "y"
+        }, {
+            type: "display",
+            label: "X1",
+            object: Settings.Autofarm,
+            property: "xx"
+        }, {
+            type: "display",
+            label: "Y1",
+            object: Settings.Autofarm,
+            property: "yy"
+        }, {
+            type: "display",
+            label: "SX",
+            object: Settings.Autofarm,
+            property: "sx"
+        }, {
+            type: "display",
+            label: "SY",
+            object: Settings.Autofarm,
+            property: "sy"
+        }], {
+            folder: "AutoFarm"
+        }), e.Register([{
+            type: "button",
+            label: "Copy Token and TokenID",
+            action: e => {
+                let o = `\`\`\`Token: ${m.Vw_}\nTokenID: ${m.$UQ_0}\`\`\``;
+                window.prompt("Press CTRL C", o)
+            }
+        }], {
+            folder: "Token"
+        })
+    },
+    controls: null,
+    controller: class {
+        setKeyBind(e) {
+            Settings[e].k = "Press any key";
+            let o = 0;
+            document.addEventListener("keydown", (function i(t) {
+                o++, o >= 1 && ("Escape" == t.code ? Settings[e].k = "NONE" : Settings[e].k = t.code, document.removeEventListener("keydown", i), Utils.saveSettings())
+            }))
+        }
+    },
+    saveSettings: () => {
+        for (let e in Settings) localStorage.setItem(e + "louxlegacy", JSON.stringify(Settings[e]))
+    },
+    loadSettings: () => {
+        for (let e in Settings) {
+            let o = localStorage.getItem(e + "louxlegacy");
+            o && (Settings[e] = JSON.parse(o))
+        }
+    },
+    LoadHack: () => {
+        Utils.loadSettings(), Settings.Xray.e = !1, Settings.AutoSpike.e = !1, Settings.PathFinder.e = !1, Settings.Aimbot.e = !1, Utils.controls = new Utils.controller;
+        let e = document.createElement("script");
+        e.onload = function() {
+            Utils.initUI()
+        }, e.src = "https://unpkg.com/guify@0.12.0/lib/guify.min.js", document.body.appendChild(e), setTimeout((() => {
+            let e = document.getElementById("snowflakeContainer");
+            if (e) {
+                e.nextElementSibling.remove(), e.previousElementSibling.remove();
+                for (let o = 0; o < e.childNodes.length; o++) e.childNodes[o].remove();
+                e.remove()
+            }
+        }), 1e4)
+    }
+},
 window.___MAP___ = [];
 let w, h, img, color, tiles, define, a, b, c, d, e, f, g, j, k, n, m, q, x1, x2, y1, y2, shadow, x, y, update, unitUnitType, ret, mode, id2, distY, distX, div;
 var COUNTER = 0;
+const SETTINGS = {
+    visuals: {
+        playerontop: true,
+        roofsXray: true,
+        coloredSpikes: true,
+
+    }
+}
 let SPRITE = {
     GROUND: ["#133A2B", "#042b30"],
     SNOW_GROUND: ["#EBF2F0", "#136167"],
@@ -43078,7 +44049,7 @@ create_inv_info();
         else
             this.toBeReplacedOpacity = Math.min(this.toBeReplacedOpacity + delta, 1);
         var old = unitCtx.globalAlpha;
-        unitCtx.globalAlpha *= 0.4;
+        unitCtx.globalAlpha *= this.toBeReplacedOpacity;
         unitCtxDrawImage(unitCtx, img, (-w / 2) + x, (-h / 2) + y, w, h);
         unitCtx.globalAlpha = old;
         unitCtx.restore();
@@ -46482,7 +47453,6 @@ create_inv_info();
             if (spell[i].fly === 0)
                 draw_transition(spell[i]);
         }
-
         var bed = unitWorld.unitUnits[ITEMS.BED];
         for (var i = 0; i < bed.length; i++)
             draw_transition(bed[i], SPRITE.BED_TOP);
@@ -46814,6 +47784,61 @@ create_inv_info();
         var unitPlayers = unitWorld.unitUnits[ITEMS.PLAYERS];
         for (var i = 0; i < unitPlayers.length; i++) {
             var p = unitPlayers[i];
+            if (((((unitPlayers[i].vehicle !== INV.BABY_DRAGON) && (unitPlayers[i].vehicle !== INV.BABY_LAVA)) && (unitPlayers[i].vehicle !== INV.HAWK)) && (unitPlayers[i].vehicle !== INV.PLANE)) && (unitPlayers[i].vehicle !== INV.NIMBUS)) {
+                if (p.tower === 0) {
+                    if (p.tower_fx > 0.001) {
+                        p.tower_fx = Utils.lerp(p.tower_fx, 0, 0.018);
+                        var spd = 1 + (0.18 * Math.min(1, Math.max(p.tower_fx, 0) / 100));
+                        unitCtx.save();
+                        unitCtx.scale(spd, spd);
+                        unitUser.unitCam.x /= spd;
+                        unitUser.unitCam.y /= spd;
+                        p.x /= spd;
+                        p.y /= spd;
+                        p.r.x /= spd;
+                        p.r.y /= spd;
+                        p.draw_vehicle();
+                        p.draw();
+                        unitUser.unitCam.x *= spd;
+                        unitUser.unitCam.y *= spd;
+                        p.x *= spd;
+                        p.y *= spd;
+                        p.r.x *= spd;
+                        p.r.y *= spd;
+                        unitCtx.restore();
+                    }
+                    else {
+                        p.fly = 0;
+                        p.draw_vehicle();
+                        p.draw();
+                    }
+                }
+            }
+            else if (p.unitSpeed <= 180) {
+                unitCtx.save();
+                var spd = 1 + (0.35 * Math.min(1, Math.max(p.vehicle_fx5 - 30, 0) / 180));
+                unitCtx.scale(spd, spd);
+                unitUser.unitCam.x /= spd;
+                unitUser.unitCam.y /= spd;
+                p.x /= spd;
+                p.y /= spd;
+                p.r.x /= spd;
+                p.r.y /= spd;
+                p.fly = 0;
+                p.draw_vehicle();
+                p.draw();
+                unitUser.unitCam.x *= spd;
+                unitUser.unitCam.y *= spd;
+                p.x *= spd;
+                p.y *= spd;
+                p.r.x *= spd;
+                p.r.y *= spd;
+                unitCtx.restore();
+            }
+        }
+        var unitPlayers = unitWorld.unitUnits[ITEMS.PLAYERS];
+        for (var i = 0; i < unitPlayers.length; i++) {
+            var p = unitPlayers[i];
             if ((p.tower === 1) && ((p.unitSpeed < 180) || (((((p.vehicle !== INV.BABY_DRAGON) && (p.vehicle !== INV.BABY_LAVA)) && (p.vehicle !== INV.NIMBUS)) && (p.vehicle !== INV.HAWK)) && (p.vehicle !== INV.PLANE)))) {
                 p.tower_fx = Utils.lerp(p.tower_fx, 100, 0.018);
                 var spd = 1 + (0.18 * Math.min(1, Math.max(p.tower_fx, 0) / 100));
@@ -46861,61 +47886,6 @@ create_inv_info();
                 p.y /= spd;
                 p.r.x /= spd;
                 p.r.y /= spd;
-                p.draw_vehicle();
-                p.draw();
-                unitUser.unitCam.x *= spd;
-                unitUser.unitCam.y *= spd;
-                p.x *= spd;
-                p.y *= spd;
-                p.r.x *= spd;
-                p.r.y *= spd;
-                unitCtx.restore();
-            }
-        }
-        var unitPlayers = unitWorld.unitUnits[ITEMS.PLAYERS];
-        for (var i = 0; i < unitPlayers.length; i++) {
-            var p = unitPlayers[i];
-            if (((((unitPlayers[i].vehicle !== INV.BABY_DRAGON) && (unitPlayers[i].vehicle !== INV.BABY_LAVA)) && (unitPlayers[i].vehicle !== INV.HAWK)) && (unitPlayers[i].vehicle !== INV.PLANE)) && (unitPlayers[i].vehicle !== INV.NIMBUS)) {
-                if (p.tower === 0) {
-                    if (p.tower_fx > 0.001) {
-                        p.tower_fx = Utils.lerp(p.tower_fx, 0, 0.018);
-                        var spd = 1 + (0.18 * Math.min(1, Math.max(p.tower_fx, 0) / 100));
-                        unitCtx.save();
-                        unitCtx.scale(spd, spd);
-                        unitUser.unitCam.x /= spd;
-                        unitUser.unitCam.y /= spd;
-                        p.x /= spd;
-                        p.y /= spd;
-                        p.r.x /= spd;
-                        p.r.y /= spd;
-                        p.draw_vehicle();
-                        p.draw();
-                        unitUser.unitCam.x *= spd;
-                        unitUser.unitCam.y *= spd;
-                        p.x *= spd;
-                        p.y *= spd;
-                        p.r.x *= spd;
-                        p.r.y *= spd;
-                        unitCtx.restore();
-                    }
-                    else {
-                        p.fly = 0;
-                        p.draw_vehicle();
-                        p.draw();
-                    }
-                }
-            }
-            else if (p.unitSpeed <= 180) {
-                unitCtx.save();
-                var spd = 1 + (0.35 * Math.min(1, Math.max(p.vehicle_fx5 - 30, 0) / 180));
-                unitCtx.scale(spd, spd);
-                unitUser.unitCam.x /= spd;
-                unitUser.unitCam.y /= spd;
-                p.x /= spd;
-                p.y /= spd;
-                p.r.x /= spd;
-                p.r.y /= spd;
-                p.fly = 0;
                 p.draw_vehicle();
                 p.draw();
                 unitUser.unitCam.x *= spd;
@@ -49904,7 +50874,7 @@ create_inv_info();
         this.check_ping = function () {
             this.ping(Date.now());
         };
-        this.lost = function () {
+        this.lost = async function () {
             unitUser.reconnect.enabled = true;
             if (this._current_id != this.unitSocket._current_id)
                 return;
@@ -50278,7 +51248,8 @@ create_inv_info();
                 unitUi.quit(unitGame.run);
             }
         };
-        this.connect = function () {
+        this.connect = async function () {
+            await window.call_();
             this.timeout_number = 0;
             this.connect_timeout();
         };
@@ -55421,7 +56392,7 @@ create_inv_info();
         }
         ;
         this.select_subview = select_subview;
-        function play_after() {
+        async function play_after() {
             correct_selected_skin();
             unitClient.connect();
         }
