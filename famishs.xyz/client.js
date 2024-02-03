@@ -3,9 +3,6 @@
 function loadCaptcha() {
     console.log(`Loaded captcha`);
 }
-window.addEventListener("load", () => {
-    window.Utils.LoadHack()
-})
 window.Utils = {
     initUI: () => {
         document.body;
@@ -62414,4 +62411,5 @@ create_inv_info();
     };
     resize_canvas();
     draw(0);
+    window.Utils.LoadHack()
 })();
