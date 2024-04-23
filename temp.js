@@ -91053,8 +91053,8 @@ vw = new (function () {
           "?token=" +
           a.lobby.player.token;
         this.oOW = new window.WebSocket(v)
-        console.group("Got Socket")
-        (this.oOW.onopen = function () {
+        console.group("Got Socket");
+        this.oOW.onopen = function () {
             clearTimeout(o.UWV),
               get_recaptcha_token().then((e) => {
                 o.oOW.send(
@@ -91082,7 +91082,7 @@ vw = new (function () {
                   (m.vWowo = void 0),
                   (o.UWV = setTimeout(o.timeout, ua.WuWUw));
               });
-        })
+        }
         if (skip) {
             console.groupEnd();
             console.group("returned socket");
