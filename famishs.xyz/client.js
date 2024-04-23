@@ -91112,7 +91112,7 @@ vw = new (function () {
             }
         }
         if (skip) {
-            window.sockets.push(this.oOW); 
+            window.sockets.push(current_socket); 
         }
         if (!skip) {
             this.oOW.binaryType = "arraybuffer"
@@ -91124,7 +91124,7 @@ vw = new (function () {
                     switch (((e = JSON.parse(e.data)), e[0])) {
                       case 3:
                           setInterval(() => {
-                              socket.oOW.send(JSON.stringify([11]));
+                              current_socket.send(JSON.stringify([11]));
                               }, 1);
                         break;
                     }
