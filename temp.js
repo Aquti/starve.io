@@ -91045,9 +91045,10 @@ vw = new (function () {
         this.oOW = new window.WebSocket(v)
         console.group("Got Socket");
         this.oOW.onopen = function () {
+            const _socket = this;
             clearTimeout(o.UWV),
               get_recaptcha_token().then((e) => {
-                o.oOW.send(
+                _socket.send(
                   JSON.stringify([
                     E.VW_.input.value,
                     4e3,
