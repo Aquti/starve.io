@@ -1940,6 +1940,10 @@ let AutoRespawnInterval,
     "https://raw.githubusercontent.com/XmreLoux/images/main/blizzard.png");
 let Spectator,
   Settings = {
+    AutoSpikeMode: {
+      type: true,
+      key: "KeyC"
+    },
     Fly: { o: 0.5, e: !1 },
     Hitbox: !1,
     Debug: !1,
@@ -61321,7 +61325,16 @@ function Kj(o, i) {
           e.code === Settings.AutoEme.k &&
             (Settings.AutoEme.e = !Settings.AutoEme.e),
           e.code === Settings.Autofarm.k &&
-            (Settings.Autofarm.e = !Settings.Autofarm.e),
+            (Settings.Autofarm.e = !Settings.Autofarm.e);
+          if (e.code === Settings.AutoSpikeMode.key) {
+            (Settings.AutoSpikeMode.type != Settings.AutoSpikeMode.type);
+            if(!Settings.AutoSpikeMode.type){
+              Settings.AutoSpike.p = ["Reidite Spike","Amethyst Spike","Diamond Spike","Gold Spike","Stone Spike","Wood Spike","Wood Wall"]
+            }
+            if(Settings.AutoSpikeMode.type) {
+              Settings.AutoSpike.p = ["Wood Wall", "Reidite Spike","Amethyst Spike","Diamond Spike","Gold Spike","Stone Spike","Wood Spike"]
+            }
+          }
           e.code === Settings.AutoRes.k &&
             (Settings.AutoRes.e = !Settings.AutoRes.e),
           e.code === Settings.Aimbot.k &&
@@ -61911,16 +61924,25 @@ function dh(e) {
   if (Settings.ListEnabledHacks) {
     l.save();
     let e = 20;
-    for (hack in Settings)
-      Settings[hack].e &&
-        Settings[hack].k &&
-        ((l.font = "18px Baloo Paaji"),
-        (l.strokeStyle = "black"),
-        (l.lineWidth = 7),
-        (l.fillStyle = "red"),
-        l.strokeText(hack, 0, e),
-        l.fillText(hack, 0, e),
-        (e += 20));
+    for (var hack in Settings) {
+      if (Settings[hack].e && Settings[hack].k) {
+        l.font = "18px Baloo Paaji";
+        l.strokeStyle = "black";
+        l.lineWidth = 7;
+        l.fillStyle = "red";
+        l.strokeText(hack, 0, e);
+        l.fillText(hack, 0, e);
+        e += 20;
+      }
+      l.font = "18px Baloo Paaji";
+      l.strokeStyle = "black";
+      l.lineWidth = 7;
+      l.fillStyle = "blue";
+      l.strokeText(`AutoSpike Type: ${Settings.AutoSpikeMode.type ? "Wall" : "Spike"}`, 0, e);
+      l.fillText(`AutoSpike Type: ${Settings.AutoSpikeMode.type ? "Wall" : "Spike"}`, 0, e);
+      e += 20;
+    }
+
     Spectator &&
       ((l.font = "18px Baloo Paaji"),
       (l.strokeStyle = "black"),
