@@ -61934,14 +61934,14 @@ function dh(e) {
         l.fillText(hack, 0, e);
         e += 20;
       }
-      l.font = "18px Baloo Paaji";
-      l.strokeStyle = "black";
-      l.lineWidth = 7;
-      l.fillStyle = "blue";
-      l.strokeText(`AutoSpike Type: ${Settings.AutoSpikeMode.type ? "Wall" : "Spike"}`, 0, e);
-      l.fillText(`AutoSpike Type: ${Settings.AutoSpikeMode.type ? "Wall" : "Spike"}`, 0, e);
-      e += 20;
     }
+    l.font = "18px Baloo Paaji";
+    l.strokeStyle = "black";
+    l.lineWidth = 7;
+    l.fillStyle = "blue";
+    l.strokeText(`AutoSpike Type: ${Settings.AutoSpikeMode.type ? "Wall" : "Spike"}`, 0, e);
+    l.fillText(`AutoSpike Type: ${Settings.AutoSpikeMode.type ? "Wall" : "Spike"}`, 0, e);
+    e += 20;
 
     Spectator &&
       ((l.font = "18px Baloo Paaji"),
