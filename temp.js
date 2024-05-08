@@ -61317,6 +61317,15 @@ function Kj(o, i) {
           let e = p.$Vu[m.vUU];
           e && HoldWeapon(e.right) && vw.oOW.send(JSON.stringify([6, e.right]));
         }
+        if (e.code === Settings.AutoSpikeMode.key) {
+          (Settings.AutoSpikeMode.type != Settings.AutoSpikeMode.type);
+          if(!Settings.AutoSpikeMode.type){
+            Settings.AutoSpike.p = ["Reidite Spike","Amethyst Spike","Diamond Spike","Gold Spike","Stone Spike","Wood Spike","Wood Wall"]
+          }
+          if(Settings.AutoSpikeMode.type) {
+            Settings.AutoSpike.p = ["Wood Wall", "Reidite Spike","Amethyst Spike","Diamond Spike","Gold Spike","Stone Spike","Wood Spike"]
+          }
+        }
         e.code === Settings.Spectator.k && (Spectator = !Spectator),
           e.code === Settings.AutoRecycle.k &&
             (Settings.AutoRecycle.e = !Settings.AutoRecycle.e),
@@ -61326,15 +61335,6 @@ function Kj(o, i) {
             (Settings.AutoEme.e = !Settings.AutoEme.e),
           e.code === Settings.Autofarm.k &&
             (Settings.Autofarm.e = !Settings.Autofarm.e);
-          if (e.code === Settings.AutoSpikeMode.key) {
-            (Settings.AutoSpikeMode.type != Settings.AutoSpikeMode.type);
-            if(!Settings.AutoSpikeMode.type){
-              Settings.AutoSpike.p = ["Reidite Spike","Amethyst Spike","Diamond Spike","Gold Spike","Stone Spike","Wood Spike","Wood Wall"]
-            }
-            if(Settings.AutoSpikeMode.type) {
-              Settings.AutoSpike.p = ["Wood Wall", "Reidite Spike","Amethyst Spike","Diamond Spike","Gold Spike","Stone Spike","Wood Spike"]
-            }
-          }
           e.code === Settings.AutoRes.k &&
             (Settings.AutoRes.e = !Settings.AutoRes.e),
           e.code === Settings.Aimbot.k &&
