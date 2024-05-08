@@ -1,4 +1,4 @@
-  !(function (e) {
+!(function (e) {
   if ("object" == typeof exports) module.exports = e();
   else if ("function" == typeof define && define.amd) define(e);
   else {
@@ -61318,7 +61318,7 @@ function Kj(o, i) {
           e && HoldWeapon(e.right) && vw.oOW.send(JSON.stringify([6, e.right]));
         }
         if (e.code === Settings.AutoSpikeMode.key) {
-          Settings.AutoSpikeMode.type != Settings.AutoSpikeMode.type
+          Settings.AutoSpikeMode.type = !Settings.AutoSpikeMode.type
           if(!Settings.AutoSpikeMode.type){
             Settings.AutoSpike.p = ["Reidite Spike","Amethyst Spike","Diamond Spike","Gold Spike","Stone Spike","Wood Spike","Wood Wall"]
           }
