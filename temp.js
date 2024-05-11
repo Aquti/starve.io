@@ -62314,7 +62314,7 @@ function db(e, o, i, t) {
         root: window.container,
         open: !1,
       });
-      e.Register({ type: "folder", label: "Visuals", open: !1 }),
+        e.Register({ type: "folder", label: "Visuals", open: !1 }),
         e.Register({ type: "folder", label: "Misc", open: !1 }),
         e.Register({ type: "folder", label: "Binds", open: !1 }),
         e.Register({ type: "folder", label: "AutoFarm", open: !1 }),
@@ -63392,7 +63392,7 @@ function db(e, o, i, t) {
             },
           ],
           { folder: "Token" }
-        ),
+        )
     },
     controls: null,
     controller: class {
