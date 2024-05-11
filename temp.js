@@ -2194,14 +2194,14 @@
         let distance = getDistance((ourPlayer.x + m.o0.x), (currentEnemy.x + m.o0.x), (ourPlayer.y + m.o0.y), (currentEnemy.y + m.o0.y))
         if (distance < 800) {
           var enemy = {x: currentEnemy.x + m.o0.x, y: currentEnemy.y + m.o0.y}
-          EnemyInRange.push(enemy);
+          EnemyInRange.push(currentEnemy);
         }
       }
     }
     if (EnemyInRange.length > 0) {
       closestEnemy = EnemyInRange.reduce(function(prev, curr) {
-        var prevDistance = (mousePosition.x - prev.x) ** 2 + (mousePosition.y - prev.y) ** 2;
-        var currDistance = (mousePosition.x - curr.x) ** 2 + (mousePosition.y - curr.y) ** 2;
+        var prevDistance = (mousePosition.x - (prev.x + m.o0.x)) ** 2 + (mousePosition.y - (prev.y + m.o0.y)) ** 2;
+        var currDistance = (mousePosition.x - (curr.x + + m.o0.x)) ** 2 + (mousePosition.y - (curr.y + m.o0.y)) ** 2;
         return prevDistance < currDistance ? prev : curr;
       });
     }
