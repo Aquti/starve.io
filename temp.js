@@ -2180,15 +2180,36 @@ function getNearest(e, o) {
   return i;
 }
 function EnemyToAttack(e, o) {
-  let i = null,
-    t = -1,
-    n = 2 === HoldWeapon(e.right, !1);
-  for (var r = 0, a = o.length, u = null, s = null; r < a; ++r)
-    if ((u = o[r]).VOo !== e.VOo && !u.ally && e.OO$ === u.OO$ && !u.$$V) {
-      if (((s = (e.x - u.x) ** 2 + (e.y - u.y) ** 2), n && s < 330)) continue;
-      (-1 === t || s < t) && ((t = s), (i = u));
+  let mousePosition = {x: X.WW.x, y: X.WW.y}
+  let enemiesWithinRange = [];
+  let closestEnemy = null,
+      shortestDistance = -1,
+      isMelee = 2 === HoldWeapon(e.right, !1);
+
+  for (var r = 0, a = o.length, currentEnemy = null, distance = null; r < a; ++r) {
+    currentEnemy = o[r];
+    if (currentEnemy.VOo !== e.VOo && !currentEnemy.ally && e.OO$ === currentEnemy.OO$ && !currentEnemy.$$V) {
+      distance = (e.x - currentEnemy.x) ** 2 + (e.y - currentEnemy.y) ** 2;
+      if (isMelee && distance < 330) {
+        enemiesWithinRange.push(currentEnemy);
+      }
     }
-  return i;
+  }
+
+  if (enemiesWithinRange.length > 0) {
+    closestEnemy = enemiesWithinRange.reduce(function(prev, curr) {
+      var prevDistance = (e.x - prev.x) ** 2 + (e.y - prev.y) ** 2;
+      var currDistance = (e.x - curr.x) ** 2 + (e.y - curr.y) ** 2;
+      return prevDistance < currDistance ? prev : curr;
+    });
+  }
+
+  return closestEnemy;
+}
+
+
+function DrawEnemyPosition(e) {
+
 }
 const images = { first: {}, second: {} };
 function createImage(e, o) {
@@ -12347,7 +12368,7 @@ function ke(e, o, i) {
       235.5999984741211 * e,
       164 * e,
       235.5999984741211 * e
-    ),
+    ),  
     n.bezierCurveTo(
       206 * e,
       236.0999984741211 * e,
@@ -50803,45 +50824,45 @@ function Cj() {
       oU: 0,
       attack: 0,
       update: function () {
-        var e = p.$Vu[m.vUU],
-          o = 0,
-          i = !1;
-        (o =
-          Settings.Aimbot.e && null != Settings.Aimbot.a
-            ? Settings.Aimbot.a
-            : Settings.Autofarm.e && null != Settings.Autofarm.a
-            ? Settings.Autofarm.a
-            : Settings.AutoEme.e && null != Settings.AutoEme.a
-            ? Settings.AutoEme.a
-            : Settings.AutoRes.e && null != Settings.AutoRes.a
-            ? Settings.AutoRes.a
-            : Settings.AutoTame.e && null != Settings.AutoTame.a
-            ? Settings.AutoTame.a
-            : Q0.vUW0W(X.WW, e ? { x: m.o0.x + e.x, y: m.o0.y + e.y } : Cf)),
-          (this.oU += M),
-          !X.state &&
-            e &&
-            !(e.action & P.OwU) &&
-            this.oU > ua.OwU &&
-            ((this.attack = 1), (i = !0), (this.oU = 0), vw.vwvU0(o)),
-          e && ((e.angle = o), (e.v_v = o)),
-          i ||
-            ((this.timeout += M),
-            this.timeout > ua.$QVV_ &&
-              ((this.timeout = 0),
-              0.005 < Math.abs(this.angle - o) &&
-                (vw.QO$oW(o), (this.angle = o)))),
-          m.QO_.open ||
-            m.uWv.open ||
-            Settings.PathFinder.e ||
-            ((e = 0),
-            Ya.Q0UQW() && (e |= 1),
-            Ya.OoVwv() && (e |= 2),
-            Ya.OUvUU() && (e |= 4),
-            Ya.VOOQW() && (e |= 8),
-            this.OvV != e && vw.uOQ_w(e),
-            (this.OvV = e));
-      },
+        var target = p.$Vu[m.vUU],
+            angle = 0,
+            shouldAttack = false;
+        angle = Settings.Aimbot.e && null != Settings.Aimbot.a ? Settings.Aimbot.a :
+                Settings.Autofarm.e && null != Settings.Autofarm.a ? Settings.Autofarm.a :
+                Settings.AutoEme.e && null != Settings.AutoEme.a ? Settings.AutoEme.a :
+                Settings.AutoRes.e && null != Settings.AutoRes.a ? Settings.AutoRes.a :
+                Settings.AutoTame.e && null != Settings.AutoTame.a ? Settings.AutoTame.a :
+                Q0.vUW0W(X.WW, target ? { x: m.o0.x + target.x, y: m.o0.y + target.y } : Cf);
+        this.oU += M;
+        if (!X.state && target && !(target.action & P.OwU) && this.oU > ua.OwU) {
+            this.attack = 1;
+            shouldAttack = true;
+            this.oU = 0;
+            vw.vwvU0(angle);
+        }
+        if (target) {
+            target.angle = angle;
+            target.v_v = angle;
+        }
+        if (!shouldAttack) {
+            this.timeout += M;
+            if (this.timeout > ua.$QVV_ && (this.timeout = 0, 0.005 < Math.abs(this.angle - angle))) {
+                vw.QO$oW(angle);
+                this.angle = angle;
+            }
+        }
+        if (!m.QO_.open && !m.uWv.open && !Settings.PathFinder.e) {
+            var flag = 0;
+            Ya.Q0UQW() && (flag |= 1);
+            Ya.OoVwv() && (flag |= 2);
+            Ya.OUvUU() && (flag |= 4);
+            Ya.VOOQW() && (flag |= 8);
+            if (this.OvV != flag) {
+                vw.uOQ_w(flag);
+                this.OvV = flag;
+            }
+        }
+    },    
     }),
     (this.uUw = {
       c: 1,
@@ -62302,7 +62323,6 @@ function db(e, o, i, t) {
         e.Register({ type: "folder", label: "AutoSpike", open: !1 }),
         e.Register({ type: "folder", label: "AutoCraft&Recycle", open: !1 }),
         e.Register({ type: "folder", label: "Token", open: !1 }),
-        e.Register({ type: "folder", label: "DDOS", open: !1 }),
         e.Register(
           [
             {
@@ -63373,21 +63393,6 @@ function db(e, o, i, t) {
           ],
           { folder: "Token" }
         ),
-        e.Register(
-          [
-            {
-              type: "checkbox",
-              label: "DDoS",
-              object: ddos,
-              property: "on",
-              onChange: (e) => {
-                !0 === e ? DDoS() : !1 === e && StopDDoS(),
-                  Utils.saveSettings();
-              },
-            },
-          ],
-          { folder: "DDOS" }
-        );
     },
     controls: null,
     controller: class {
@@ -92164,8 +92169,11 @@ function LouxInterval() {
           default:
             Settings.Aimbot.a = null;
         }
+        let e = EnemyToAttack(d, p.U$[u.O$Q]);
+        if (e) {
+          DrawEnemyPosition(e);
+        }
         if (n) {
-          let e = EnemyToAttack(d, p.U$[u.O$Q]);
           if (e) {
             let o = dist2dSQRT(d, e);
             if (o <= n) {
