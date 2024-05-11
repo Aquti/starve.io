@@ -2184,7 +2184,7 @@
     const mousePosition = {x: X.WW.x, y: X.WW.y};
     let closestEnemy;
 
-    for (let i = 0; i < allPlayers; i++) {
+    for (let i = 0; i < allPlayers.length; i++) {
       let currentEnemy = allPlayers[i];
       if (currentEnemy.VOo !== ourPlayer.Voo && !currentEnemy.ally && currentEnemy.OO$ === ourPlayer.OO$ && !currentEnemy.$$V) {
         let distance = (ourPlayer.x - currentEnemy.x) ** 2 + (ourPlayer.y - currentEnemy.y) ** 2;
