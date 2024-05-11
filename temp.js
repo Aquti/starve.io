@@ -2179,6 +2179,9 @@
         (-1 === t || u < t) && ((t = u), (i = a));
     return i;
   }
+  function getDistance(x1, y1, x2, y2) {
+    return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+  }
   function EnemyToAttack(ourPlayer, allPlayers) {
     const EnemyInRange = [];
     const mousePosition = {x: X.WW.x, y: X.WW.y};
@@ -2186,10 +2189,12 @@
 
     for (let i = 0; i < allPlayers.length; i++) {
       let currentEnemy = allPlayers[i];
+      let enemyY = currentEnemy.y / 10; let ourY = ourPlayer.y;
       if (currentEnemy.VOo !== ourPlayer.Voo && !currentEnemy.ally && currentEnemy.OO$ === ourPlayer.OO$ && !currentEnemy.$$V) {
-        let distance = (ourPlayer.x - currentEnemy.x) ** 2 + (ourPlayer.y - currentEnemy.y) ** 2;
-        if ( distance / 100 < 700 ) {
-          EnemyInRange.push(currentEnemy);
+        let distance = getDistance(ourPlayer.x, currentEnemy.x, ourY, enemyY);
+        if (distance < 1800) {
+          var enemy = {x: currentEnemy.x + m.o0.x, y: currentEnemy.y + m.o0.y}
+          EnemyInRange.push(enemy);
         }
       }
     }
