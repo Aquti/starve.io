@@ -2191,8 +2191,8 @@
       let currentEnemy = allPlayers[i];
       let enemyY = currentEnemy.y / 10; let ourY = ourPlayer.y / 10;
       if (currentEnemy.VOo !== ourPlayer.Voo && !currentEnemy.ally && currentEnemy.OO$ === ourPlayer.OO$ && !currentEnemy.$$V) {
-        let distance = getDistance(ourPlayer.x, currentEnemy.x, ourY, enemyY);
-        if (distance < 1800) {
+        let distance = getDistance((ourPlayer.x + m.o0.x), (currentEnemy.x + m.o0.x), (ourPlayer.y + m.o0.y), (currentEnemy.y + m.o0.y))
+        if (distance < 800) {
           var enemy = {x: currentEnemy.x + m.o0.x, y: currentEnemy.y + m.o0.y}
           EnemyInRange.push(enemy);
         }
