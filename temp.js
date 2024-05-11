@@ -2180,7 +2180,7 @@ function getNearest(e, o) {
   return i;
 }
 function EnemyToAttack(e, o) {
-  let mousePosition = {x: X.WW.x, y: X.WW.y}
+  let mousePosition = {x: X.WW.x, y: X.WW.y};
   let enemiesWithinRange = [];
   let closestEnemy = null,
       shortestDistance = -1,
@@ -2198,15 +2198,14 @@ function EnemyToAttack(e, o) {
 
   if (enemiesWithinRange.length > 0) {
     closestEnemy = enemiesWithinRange.reduce(function(prev, curr) {
-      var prevDistance = (e.x - prev.x) ** 2 + (e.y - prev.y) ** 2;
-      var currDistance = (e.x - curr.x) ** 2 + (e.y - curr.y) ** 2;
+      var prevDistance = (mousePosition.x - prev.x) ** 2 + (mousePosition.y - prev.y) ** 2;
+      var currDistance = (mousePosition.x - curr.x) ** 2 + (mousePosition.y - curr.y) ** 2;
       return prevDistance < currDistance ? prev : curr;
     });
   }
 
   return closestEnemy;
 }
-
 
 function DrawEnemyPosition(e) {
 
@@ -92148,6 +92147,7 @@ function LouxInterval() {
             vw.oOW.send(JSON.stringify([9, o.placeid, o.id])));
         }
       }
+      let e = EnemyToAttack(d, p.U$[u.O$Q]);
       if (Settings.Aimbot.e) {
         switch (HoldWeapon(d.right, !0)) {
           case 1:
@@ -92163,13 +92163,12 @@ function LouxInterval() {
             n = d.OO$ ? 140 : 125;
             break;
           case 5:
-            if (d.QWO == e.wo$ || d.QWO == e.Qv$) n = d.OO$ ? 120.8 : 97.6;
+            if (d.QWO == window.e.wo$ || d.QWO == window.e.Qv$) n = d.OO$ ? 120.8 : 97.6;
             else Settings.Aimbot.a = null;
             break;
           default:
             Settings.Aimbot.a = null;
         }
-        let e = EnemyToAttack(d, p.U$[u.O$Q]);
         if (e) {
           DrawEnemyPosition(e);
         }
