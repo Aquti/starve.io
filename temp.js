@@ -2179,32 +2179,28 @@ function getNearest(e, o) {
       (-1 === t || u < t) && ((t = u), (i = a));
   return i;
 }
-function EnemyToAttack(e, o) {
-  let mousePosition = {x: X.WW.x, y: X.WW.y};
-  let enemiesWithinRange = [];
-  let closestEnemy = null,
-      shortestDistance = -1,
-      isMelee = 2 === HoldWeapon(e.right, !1);
+function EnemyToAttack(ourPlayer, allPlayers) {
+  const EnemyInRange = [];
+  const mousePosition = {x: X.WW.x, y: X.WW.y};
 
-  for (var r = 0, a = o.length, currentEnemy = null, distance = null; r < a; ++r) {
-    currentEnemy = o[r];
-    if (currentEnemy.VOo !== e.VOo && !currentEnemy.ally && e.OO$ === currentEnemy.OO$ && !currentEnemy.$$V) {
-      distance = (e.x - currentEnemy.x) ** 2 + (e.y - currentEnemy.y) ** 2;
-      if (isMelee && distance < 330) {
-        enemiesWithinRange.push(currentEnemy);
+  for (let i = 0; i < allPlayers; i++) {
+    let currentEnemy = allPlayers[i];
+    if (currentEnemy.VOo !== ourPlayer.Voo && !currentEnemy.ally && currentEnemy.OO$ === ourPlayer.OO$ && !currentEnemy.$$V) {
+      let distance = (ourPlayer.x - currentEnemy.x) ** 2 + (ourPlayer.y - currentEnemy.y) ** 2;
+      if ( distance / 100 < 700 ) {
+        EnemyInRange.push(currentEnemy);
       }
     }
   }
-
-  if (enemiesWithinRange.length > 0) {
-    closestEnemy = enemiesWithinRange.reduce(function(prev, curr) {
+  if (EnemyInRange.length > 0) {
+    closestEnemy = EnemyInRange.reduce(function(prev, curr) {
       var prevDistance = (mousePosition.x - prev.x) ** 2 + (mousePosition.y - prev.y) ** 2;
       var currDistance = (mousePosition.x - curr.x) ** 2 + (mousePosition.y - curr.y) ** 2;
       return prevDistance < currDistance ? prev : curr;
     });
   }
 
-  return closestEnemy;
+  return closestEnemy
 }
 
 function DrawEnemyPosition(e) {
