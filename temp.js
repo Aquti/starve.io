@@ -2189,7 +2189,7 @@
 
     for (let i = 0; i < allPlayers.length; i++) {
       let currentEnemy = allPlayers[i];
-      let enemyY = currentEnemy.y / 10; let ourY = ourPlayer.y;
+      let enemyY = currentEnemy.y / 10; let ourY = ourPlayer.y / 10;
       if (currentEnemy.VOo !== ourPlayer.Voo && !currentEnemy.ally && currentEnemy.OO$ === ourPlayer.OO$ && !currentEnemy.$$V) {
         let distance = getDistance(ourPlayer.x, currentEnemy.x, ourY, enemyY);
         if (distance < 1800) {
