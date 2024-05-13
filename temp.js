@@ -1935,7 +1935,7 @@
     delete localStorage.AutoSpikelouxlegacy;
     location.reload()
   }
-  if (JSON.parse(localStorage.AutoSpikelouxlegacy).s == true && JSON.parse(localSsorage.AutoSpikelouxlegacy).m == true) {
+  if (JSON.parse(localStorage.AutoSpikelouxlegacy).s == true && JSON.parse(localStorage.AutoSpikelouxlegacy).m == true) {
     delete localStorage.AutoSpikelouxlegacy;
     location.reload()
   }
