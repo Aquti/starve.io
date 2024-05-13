@@ -2193,6 +2193,12 @@
   function getDistance(x1, y1, x2, y2) {
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
   }
+  function EnemyInView(enemies, player) {
+    const enemy = enemies[0];
+    const e_angle = (Math.floor((((player.angle + 2 * Math.PI) % 2 * Math.PI) * 255) / 2 * Math.PI) / 255) * 360;
+    const c_angle = (Math.floor((((Q0.vUW0W(enemy, player) + 2 * Math.PI) % 2 * Math.PI) * 255) / 2 * Math.PI) / 255) * 360;
+    console.log(e_angle, c_angle) 
+  }
   function EnemyinDistance(ourPlayer, allPlayers) {
     const EnemyInRange = [];
 
