@@ -2207,8 +2207,8 @@
     for (let i = 0; i < allPlayers.length; i++) {
       let currentEnemy = allPlayers[i];
         if (currentEnemy.VOo !== ourPlayer.Voo && !currentEnemy.ally && currentEnemy.OO$ === ourPlayer.OO$ && !currentEnemy.$$V) {
-          const distance = getDistance((ourPlayer.x + m.o0.x), (currentEnemy.x + m.o0.x), (ourPlayer.y + m.o0.y), (currentEnemy.y + m.o0.y));
-          if (distance < 1000) {
+          const distance = dist2dSQRT(ourPlayer, currentEnemy);
+          if (distance < 180) {
             EnemyInRange.push(currentEnemy);
           }
         }
