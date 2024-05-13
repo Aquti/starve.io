@@ -2198,7 +2198,10 @@
     let e = 2 * Math.PI;
     const e_angle = (Math.floor((((player.angle + e) % e) * 255) / e) / 255) * 360;
     const c_angle = (Math.floor((((Q0.vUW0W(enemy, player) + e) % e) * 255) / e) / 255) * 360;
-    console.log(e_angle, c_angle) 
+
+    if (c_angle > ((e_angle - 90) % 360) || c_angle < ((e_angle + 90) % 360)) {
+      return enemies;
+    }
     return [];
   }
   function EnemyinDistance(ourPlayer, allPlayers) {
