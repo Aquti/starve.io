@@ -92130,7 +92130,7 @@
                 const _255Angle = Math.floor((((AngleToEnemy + e) % e) * 255) / e);
                 console.log(_255Angle, " Angle")
                 console.log(Settings.AutoSpike.m)
-                for (let e = 0; e < 31; e++) {
+                for (let e = 0; e < 31; e += 4) {
                   vw.oOW.send(JSON.stringify([10, i, (e + _255Angle) % 255, 0]))
                   vw.oOW.send(JSON.stringify([10, i, (_255Angle - e + 255) % 255, 0]));
                 }
@@ -92142,7 +92142,7 @@
                 vw.oOW.send(JSON.stringify([10, i, (o - e + 255) % 255, 0]));
               }
             }
-            vw.oOW.send(JSON.stringify([10, i, o, 0]));
+            //vw.oOW.send(JSON.stringify([10, i, o, 0]));
             if (Settings.AutoSpike.m && Settings.AutoSpike.s) {
               Settings.AutoSpike.m = false;
             }
