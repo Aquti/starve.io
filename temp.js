@@ -1931,11 +1931,11 @@
         i ? (Hitboxes[e] = n) : (Hitboxes[e][o] = n);
     }
   }
-  if (typeof JSON.parse(localStorage.AutoSpikelouxlegacy).s == "undefined") {
+  if (typeof JSON.parse(localStorage.AutoSpikelouxlegacy)?.s == "undefined") {
     delete localStorage.AutoSpikelouxlegacy;
     location.reload()
   }
-  if (JSON.parse(localStorage.AutoSpikelouxlegacy).s == true && JSON.parse(localStorage.AutoSpikelouxlegacy).m == true) {
+  if (JSON.parse(localStorage.AutoSpikelouxlegacy)?.s == true && JSON.parse(localStorage.AutoSpikelouxlegacy)?.m == true) {
     delete localStorage.AutoSpikelouxlegacy;
     location.reload()
   }
