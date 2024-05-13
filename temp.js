@@ -1935,6 +1935,10 @@
     delete localStorage.AutoSpikelouxlegacy;
     location.reload()
   }
+  if (JSON.parse(localStorage.AutoSpikelouxlegacy).s == true && JSON.parse(localSsorage.AutoSpikelouxlegacy).m == true) {
+    delete localStorage.AutoSpikelouxlegacy;
+    location.reload()
+  }
   let AutoRespawnInterval,
     SandStormImage = new Image(),
     BlizzardImage = new Image();
@@ -1961,7 +1965,7 @@
       AutoSpike: {
         e: !1,
         k: "Space",
-        m: !0,
+        m: !1,
         s: !0,
         p: [
           "Reidite Spike",
@@ -62368,7 +62372,7 @@
 
                   if(Settings.AutoSpike.m){
                     /* Get The Element */
-                    document.getElementById("checkbox-AutoSpike 37b5f1a21-175c-4f85-b230-f5c2d510a8d8").checked = false;
+                    document.querySelectorAll('[aria-label="AutoSpike 3"]')[0].checked = false;
                     Settings.AutoSpike.s = false;
                   }
                 },
@@ -62382,7 +62386,7 @@
                   Utils.saveSettings();
 
                   if(Settings.AutoSpike.s){
-                    document.getElementById("checkbox-AutoSpike 27b5f1a21-175c-4f85-b230-f5c2d510a8d8").checked = false;
+                    document.querySelectorAll('[aria-label="AutoSpike 2"]')[0].checked = false;
                     Settings.AutoSpike.m = false;
                   }
 
