@@ -92114,7 +92114,7 @@
                 Settings.AutoSpike.m = true;
               }
               if (enemies.length > 0) {
-                enemies = EnemyInView(enemies);
+                enemies = EnemyInView(enemies, d);
               }
               if (enemies.length != 1) {
                 Settings.AutoSpike.m = true;
