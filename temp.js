@@ -62314,22 +62314,6 @@
         document.body;
         let e = new guify({
           title: "they fixed ddos whaaaaaaaat",
-          theme: {
-            name: "LOUX",
-            colors: {
-              panelBackground: "rgb(0,0,0)",
-              componentBackground: "rgb(3, 16, 34)",
-              componentForeground: "rgb(62, 125, 215)",
-              textPrimary: "rgb(0, 255, 255)",
-              textSecondary: "rgb(255,255,255)",
-              textHover: "rgb(43, 16, 159)",
-            },
-            font: {
-              fontFamily: "Baloo Paaji",
-              fontSize: "20px",
-              fontWeight: "1",
-            },
-          },
           align: "right",
           width: 550,
           barMode: "none",
