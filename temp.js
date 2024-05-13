@@ -1931,6 +1931,10 @@
         i ? (Hitboxes[e] = n) : (Hitboxes[e][o] = n);
     }
   }
+  if (typeof JSON.parse(localStorage.AutoSpikelouxlegacy).s == "undefined") {
+    delete localStorage.AutoSpikelouxlegacy;
+    location.reload()
+  }
   let AutoRespawnInterval,
     SandStormImage = new Image(),
     BlizzardImage = new Image();
@@ -62339,7 +62343,7 @@
           e.Register({ type: "folder", label: "AutoSpike", open: !1 }),
           e.Register({ type: "folder", label: "AutoCraft&Recycle", open: !1 }),
           e.Register({ type: "folder", label: "Token", open: !1 }),
-          e.Register(
+          window.autoPage = e.Register(
             [
               {
                 type: "button",
