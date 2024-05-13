@@ -62343,7 +62343,7 @@
           e.Register({ type: "folder", label: "AutoSpike", open: !1 }),
           e.Register({ type: "folder", label: "AutoCraft&Recycle", open: !1 }),
           e.Register({ type: "folder", label: "Token", open: !1 }),
-          window.autoPage = e.Register(
+          e.Register(
             [
               {
                 type: "button",
@@ -62368,7 +62368,7 @@
 
                   if(Settings.AutoSpike.m){
                     /* Get The Element */
-                    //document.getElementById("checkbox-AutoSpike 2c2bd68d7-fca8-459d-a40a-1b44b6b64ba6").checked = false;
+                    document.getElementById("checkbox-AutoSpike 37b5f1a21-175c-4f85-b230-f5c2d510a8d8").checked = false;
                     Settings.AutoSpike.s = false;
                   }
                 },
@@ -62382,7 +62382,7 @@
                   Utils.saveSettings();
 
                   if(Settings.AutoSpike.s){
-                    document.getElementById("checkbox-AutoSpike 2c2bd68d7-fca8-459d-a40a-1b44b6b64ba6").checked = false;
+                    document.getElementById("checkbox-AutoSpike 27b5f1a21-175c-4f85-b230-f5c2d510a8d8").checked = false;
                     Settings.AutoSpike.m = false;
                   }
 
