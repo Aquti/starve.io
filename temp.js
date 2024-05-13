@@ -2195,9 +2195,11 @@
   }
   function EnemyInView(enemies, player) {
     const enemy = enemies[0];
-    const e_angle = (Math.floor((((player.angle + 2 * Math.PI) % 2 * Math.PI) * 255) / 2 * Math.PI) / 255) * 360;
-    const c_angle = (Math.floor((((Q0.vUW0W(enemy, player) + 2 * Math.PI) % 2 * Math.PI) * 255) / 2 * Math.PI) / 255) * 360;
+    let e = 2 * Math.PI,
+    const e_angle = (Math.floor((((player.angle + e) % e) * 255) / e) / 255) * 360;
+    const c_angle = (Math.floor((((Q0.vUW0W(enemy, player) + e) % e) * 255) / e) / 255) * 360;
     console.log(e_angle, c_angle) 
+    return [];
   }
   function EnemyinDistance(ourPlayer, allPlayers) {
     const EnemyInRange = [];
