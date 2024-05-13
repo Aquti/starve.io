@@ -1958,6 +1958,7 @@
         e: !1,
         k: "Space",
         m: !0,
+        s: !0,
         p: [
           "Reidite Spike",
           "Amethyst Spike",
@@ -2182,6 +2183,21 @@
   function getDistance(x1, y1, x2, y2) {
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
   }
+  function EnemyinDistance(ourPlayer, allPlayers) {
+    const EnemyInRange = [];
+
+    for (let i = 0; i < allPlayers.length; i++) {
+      let currentEnemy = allPlayers[i];
+        if (currentEnemy.VOo !== ourPlayer.Voo && !currentEnemy.ally && currentEnemy.OO$ === ourPlayer.OO$ && !currentEnemy.$$V) {
+          const distance = getDistance((ourPlayer.x + m.o0.x), (currentEnemy.x + m.o0.x), (ourPlayer.y + m.o0.y), (currentEnemy.y + m.o0.y));
+          if (distance < 1000) {
+            EnemyInRange.push(currentEnemy);
+          }
+        }
+    }
+
+    return EnemyInRange;
+  }
   function EnemyToAttack(ourPlayer, allPlayers) {
     const EnemyInRange = [];
     const mousePosition = {x: X.WW.x, y: X.WW.y};
@@ -2189,7 +2205,6 @@
 
     for (let i = 0; i < allPlayers.length; i++) {
       let currentEnemy = allPlayers[i];
-      let enemyY = currentEnemy.y / 10; let ourY = ourPlayer.y / 10;
       if (currentEnemy.VOo !== ourPlayer.Voo && !currentEnemy.ally && currentEnemy.OO$ === ourPlayer.OO$ && !currentEnemy.$$V) {
         let distance = getDistance((ourPlayer.x + m.o0.x), (currentEnemy.x + m.o0.x), (ourPlayer.y + m.o0.y), (currentEnemy.y + m.o0.y))
         if (distance < 1600) {
@@ -62346,6 +62361,27 @@
                 property: "m",
                 onChange: (e) => {
                   Utils.saveSettings();
+
+                  if(Settings.AutoSpike.m){
+                    /* Get The Element */
+                    //document.getElementById("checkbox-AutoSpike 2c2bd68d7-fca8-459d-a40a-1b44b6b64ba6").checked = false;
+                    Settings.AutoSpike.s = false;
+                  }
+                },
+              },
+              {
+                type: "checkbox",
+                label: "AutoSpike 3",
+                object: Settings.AutoSpike,
+                property: "s",
+                onChange: (e) => {
+                  Utils.saveSettings();
+
+                  if(Settings.AutoSpike.s){
+                    document.getElementById("checkbox-AutoSpike 2c2bd68d7-fca8-459d-a40a-1b44b6b64ba6").checked = false;
+                    Settings.AutoSpike.m = false;
+                  }
+
                 },
               },
               {
@@ -92071,11 +92107,39 @@
           if (i) {
             let e = 2 * Math.PI,
               o = Math.floor((((d.angle + e) % e) * 255) / e);
-            if (Settings.AutoSpike.m)
-              for (let e = 1; e < 31; e++)
-                vw.oOW.send(JSON.stringify([10, i, (e + o) % 255, 0])),
-                  vw.oOW.send(JSON.stringify([10, i, (o - e + 255) % 255, 0]));
+            if (Settings.AutoSpike.s) {
+              let enemies = EnemyinDistance(p.$Vu[m.vUU] ,p.U$[u.O$Q]);
+
+              if (enemies.length == 0) {
+                Settings.AutoSpike.m = true;
+              }
+              if (enemies.length > 0) {
+                enemies = EnemyInView(enemies);
+              }
+              if (enemies.length != 1) {
+                Settings.AutoSpike.m = true;
+              }
+              if (enemies.length == 1) {
+                const EnemyToAttack = enemies[0];
+                const AngleToEnemy = Q0.vUW0W( { x: m.o0.x + EnemyToAttack.r.x, y: m.o0.y + EnemyToAttack.r.y } , { x: m.o0.x + d.x, y: m.o0.y + d.y } );
+                const _255Angle = Math.floor((((AngleToEnemy + e) % e) * 255) / e);
+                console.log(_255Angle, " Angle")
+                for (let i = 0; i < 31; e++) {
+                  vw.oOW.send(JSON.stringify([10, i, (e + _255Angle) % 255, 0]))
+                  vw.oOW.send(JSON.stringify([10, i, (_255Angle - e + 255) % 255, 0]));
+                }
+              }
+            }
+            if (Settings.AutoSpike.m){
+              for (let e = 1; e < 31; e++){
+                vw.oOW.send(JSON.stringify([10, i, (e + o) % 255, 0]))
+                vw.oOW.send(JSON.stringify([10, i, (o - e + 255) % 255, 0]));
+              }
+            }
             vw.oOW.send(JSON.stringify([10, i, o, 0]));
+            if (Settings.AutoSpike.m && Settings.AutoSpike.s) {
+              Settings.AutoSpike.m = false;
+            }
           }
         }
         if (
