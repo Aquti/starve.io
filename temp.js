@@ -92126,10 +92126,10 @@
               }
               if (enemies.length == 1) {
                 const EnemyToAttack = enemies[0];
-                const AngleToEnemy = Q0.vUW0W( { x: m.o0.x + EnemyToAttack.r.x, y: m.o0.y + EnemyToAttack.r.y } , { x: m.o0.x + d.x, y: m.o0.y + d.y } );
+                const _x = ((EnemyToAttack.x + 0.6 * (EnemyToAttack.r.x - EnemyToAttack.x)) - EnemyToAttack.x) + EnemyToAttack.r.x
+                const _y = ((EnemyToAttack.y + 0.6 * (EnemyToAttack.r.y - EnemyToAttack.y)) - EnemyToAttack.y) + EnemyToAttack.r.y
+                const AngleToEnemy = Q0.vUW0W( { x: m.o0.x + _x, y: m.o0.y + _y } , { x: m.o0.x + d.x, y: m.o0.y + d.y } );
                 const _255Angle = Math.floor((((AngleToEnemy + e) % e) * 255) / e);
-                console.log(_255Angle, " Angle")
-                console.log(Settings.AutoSpike.m)
                 for (let e = 0; e < 31; e += 4) {
                   vw.oOW.send(JSON.stringify([10, i, (e + _255Angle) % 255, 0]))
                   vw.oOW.send(JSON.stringify([10, i, (_255Angle - e + 255) % 255, 0]));
