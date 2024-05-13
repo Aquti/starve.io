@@ -2194,15 +2194,32 @@
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
   }
   function EnemyInView(enemies, player) {
-    const enemy = enemies[0];
+    const _enemies = [];
+    let closestEnemy;
+    let closestAngle;
     let e = 2 * Math.PI;
-    const e_angle = (Math.floor((((player.angle + e) % e) * 255) / e) / 255) * 360;
-    const c_angle = (Math.floor((((Q0.vUW0W(enemy, player) + e) % e) * 255) / e) / 255) * 360;
 
-    if (c_angle > ((e_angle - 90) % 360) || c_angle < ((e_angle + 90) % 360)) {
-      return enemies;
+    for (let i = 0; i < enemies.length; i++) {
+      const e_angle = (Math.floor((((player.angle + e) % e) * 255) / e) / 255) * 360;
+      const c_angle = (Math.floor((((Q0.vUW0W(enemies[i], player) + e) % e) * 255) / e) / 255) * 360;
+      if (c_angle > ((e_angle - 90) % 360) || c_angle < ((e_angle + 90) % 360)) {
+        _enemies.push(enemies[i]);;
+      }
     }
-    return [];
+
+    if (_enemies.length > 1) {
+      for (let i = 0; i < enemies.length; i++) {
+        const e_angle = (Math.floor((((player.angle + e) % e) * 255) / e) / 255) * 360;
+        const c_angle = (Math.floor((((Q0.vUW0W(enemies[i], player) + e) % e) * 255) / e) / 255) * 360;
+        let _a = Math.abs(e_angle - c_angle); let b = Math.min(_a, 360 - _a);
+        if (b < closestAngle) {
+          closestEnemy = enemies[i];
+          closestAngle = b;
+        }
+      }
+    }
+
+    return closestEnemy? [closestEnemy] : [];
   }
   function EnemyinDistance(ourPlayer, allPlayers) {
     const EnemyInRange = [];
@@ -92126,8 +92143,8 @@
               }
               if (enemies.length == 1) {
                 const EnemyToAttack = enemies[0];
-                const _x = ((EnemyToAttack.x + 0.6 * (EnemyToAttack.r.x - EnemyToAttack.x)) - EnemyToAttack.x) + EnemyToAttack.r.x
-                const _y = ((EnemyToAttack.y + 0.6 * (EnemyToAttack.r.y - EnemyToAttack.y)) - EnemyToAttack.y) + EnemyToAttack.r.y
+                const _x = ((EnemyToAttack.x + 1 * (EnemyToAttack.r.x - EnemyToAttack.x)) - EnemyToAttack.x) + EnemyToAttack.r.x
+                const _y = ((EnemyToAttack.y + 1 * (EnemyToAttack.r.y - EnemyToAttack.y)) - EnemyToAttack.y) + EnemyToAttack.r.y
                 const AngleToEnemy = Q0.vUW0W( { x: m.o0.x + _x, y: m.o0.y + _y } , { x: m.o0.x + d.x, y: m.o0.y + d.y } );
                 const _255Angle = Math.floor((((AngleToEnemy + e) % e) * 255) / e);
                 for (let e = 0; e < 31; e += 4) {
