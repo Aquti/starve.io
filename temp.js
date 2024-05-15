@@ -92172,7 +92172,7 @@
             }
             if (Settings.FullAuto.t) {
               const Swords = [63, 62, 19, 30, 9, 6, 5, 0, 57];
-              const dist = dist2dSQRT(d, e);
+              const dist = dist2dSQRT(d, window.FullAutoEnemy);
 
               if (o <= 150) {
                 if (!Swords.includes(d.right)){
