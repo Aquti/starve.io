@@ -92171,31 +92171,31 @@
                       let direction;
                       switch (true) {
                           case (angle <= 220 && angle >= 170):
-                              direction = "top";
+                              direction = 4;
                               break;
                           case (angle > 220 && angle <= 240):
-                              direction = "top right";
+                              direction = 5;
                               break;
                           case (angle > 240 || angle < 20):
-                              direction = "right";
+                              direction = 1;
                               break;
                           case (angle > 20 && angle <= 40):
-                              direction = "bottom right";
+                              direction = 9;
                               break;
                           case (angle > 40 && angle <= 80):
-                              direction = "bottom";
+                              direction = 8;
                               break;
                           case (angle > 80 && angle <= 110):
-                              direction = "bottom left";
+                              direction = 10;
                               break;
                           case (angle > 110 && angle <= 140):
-                              direction = "left";
+                              direction = 2;
                               break;
                           case (angle > 140 && angle < 170):
-                              direction = "top left";
+                              direction = 6;
                               break;
                       }
-                      console.log(direction);
+                      vw.oOW.send(JSON.stringify([2, direction]));
                       Settings.Aimbot.e = true;
                   } else if (dist >= 200) {
                       Settings.Aimbot.e = false;
