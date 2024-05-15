@@ -61260,6 +61260,16 @@
             l.restore();
           }
         }
+        if (Settings.FullAuto.e && window.FullAutoEnemy) {
+          l.save();
+          l.lineWidth = 2.6;
+          l.beginPath();
+          l.moveTo(m.o0.x + d.x, m.o0.y + d.y);
+          l.lineTo(m.o0.x + window.FullAutoEnemy.x, m.o0.y + window.FullAutoEnemy.y);
+          l.strokeStyle = "yellow";
+          l.stroke();
+          l.restore();
+        }
         if (Settings.JoinLeave) {
           let e = 400;
           if (JoinLeave.toggle11) {
@@ -92137,17 +92147,7 @@
         if (Settings.FullAuto.e) {
           let _ctx = document.createElement("canvas").getContext("2d");
           if (!Settings.FullAuto.t) {
-            let e = EnemyToAttack(d, p.U$[u.O$Q]);
-            if (e) {
-              _ctx.save();
-              _ctx.lineWidth = 2.6;
-              _ctx.beginPath();
-              _ctx.moveTo(m.o0.x + d.x, m.o0.y + d.y);
-              _ctx.lineTo(m.o0.x + e.x, m.o0.y + e.y);
-              _ctx.strokeStyle = "yellow";
-              _ctx.stroke();
-              _ctx.restore();
-            }
+            let e = window.FullAutoEnemy = EnemyToAttack(d, p.U$[u.O$Q]);
             switch (HoldWeapon(d.right, !0)) {
               case 1:
                 var n = d.OO$ ? 196.8 : 157.6;
