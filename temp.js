@@ -92126,33 +92126,28 @@
           const ColdBar = (m.uUw.c * 100);
           let e = 2 * Math.PI;
 
-          switch (true) {
-            case !isInFire && HasFire && ColdBar <= 45 && TimeLeftForCold <= 1 && TimeLeftForCold >= 0.5:
-              let AngleToPlace = Q0.vUW0W({ x: m.o0.x + d.x, y: m.o0.y + d.y } , { x: m.o0.x + d.r.x, y: m.o0.y + d.r.y } );
-              if (isNaN(AngleToPlace)) {
-                for (let e = 0; e < 255; e += 20) {
-                  vw.oOW.send(JSON.stringify([10, 107, e % 255, 0]))
-                  vw.oOW.send(JSON.stringify([10, 107, e % 255, 0]));
-                }
+          if (!isInFire && HasFire && ColdBar <= 45 && TimeLeftForCold <= 1 && TimeLeftForCold >= 0.5) {
+            let AngleToPlace = Q0.vUW0W({ x: m.o0.x + d.x, y: m.o0.y + d.y }, { x: m.o0.x + d.r.x, y: m.o0.y + d.r.y });
+            if (isNaN(AngleToPlace)) {
+              for (let e = 0; e < 255; e += 20) {
+                vw.oOW.send(JSON.stringify([10, 107, e % 255, 0]));
+                vw.oOW.send(JSON.stringify([10, 107, e % 255, 0]));
               }
-              if (!isNaN(AngleToPlace)) {
-                const _255Angle = Math.floor((((AngleToPlace + e / 2) % e) * 255) / e);
-
-                for (let e = 0; e < 32; e += 4) {
-                  vw.oOW.send(JSON.stringify([10, 107, (e + _255Angle) % 255, 0]))
-                  vw.oOW.send(JSON.stringify([10, 107, (_255Angle - e + 255) % 255, 0]));
-                }
+            }
+            if (!isNaN(AngleToPlace)) {
+              const _255Angle = Math.floor((((AngleToPlace + e / 2) % e) * 255) / e);
+          
+              for (let e = 0; e < 32; e += 4) {
+                vw.oOW.send(JSON.stringify([10, 107, (e + _255Angle) % 255, 0]));
+                vw.oOW.send(JSON.stringify([10, 107, (_255Angle - e + 255) % 255, 0]));
               }
-              break;
-            case !HasFire && HasSpace && HasBook:
-              const CanCraftFire = m.ww.QoW.some(item => item.id === 0);
-              if (CanCraftFire) {
-                vw.oOW.send(JSON.stringify([7, 0]))
-              }
-              break;
-            default:
-              break;
-          }          
+            }
+          } else if (!HasFire && HasSpace && HasBook) {
+            const CanCraftFire = m.ww.QoW.some(item => item.id === 0);
+            if (CanCraftFire) {
+              vw.oOW.send(JSON.stringify([7, 0]));
+            }
+          }      
         }
         if (Settings.AutoSpike.e) {
           for (let e = 0, t = Settings.AutoSpike.p; e < t.length; e++) {
