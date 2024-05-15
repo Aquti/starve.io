@@ -92167,6 +92167,12 @@
             }
           }
           if (Settings.FullAuto.t) {
+            let e = p.U$[u.O$Q].indexOf(Settings.FullAuto.t);
+            if (e === -1) {
+                Settings.FullAuto.t = false;
+            }            
+          }
+          if (Settings.FullAuto.t) {
             if (dist2dSQRT(d, Settings.FullAuto.t) > 800) {
               Settings.FullAuto.t = false;
             }
