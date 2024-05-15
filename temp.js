@@ -92156,21 +92156,8 @@
               case 1:
                 var n = d.OO$ ? 196.8 : 157.6;
                 break;
-              case 2:
-                n = d.OO$ ? 291.8 : 227.6;
-                break;
-              case 3:
-                n = 620;
-                break;
-              case 4:
-                n = d.OO$ ? 140 : 125;
-                break;
-              case 5:
-                if (d.QWO == window.e.wo$ || d.QWO == window.e.Qv$) n = d.OO$ ? 120.8 : 97.6;
-                else Settings.FullAuto.a = false;
-                break;
               default:
-                Settings.FullAuto.a = false;
+                var n = 160;
             }
             if (n) {
               const dist = dist2dSQRT(d, e);
