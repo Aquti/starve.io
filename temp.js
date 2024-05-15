@@ -62943,15 +62943,6 @@
             [
               {
                 type: "checkbox",
-                label: "Auto FireWalk",
-                object: Settings.AutoFire,
-                propety: "e",
-                onChange: (e) => {
-                  Utils.saveSettings();
-                }
-              },
-              {
-                type: "checkbox",
                 label: "Autobridge with G mode",
                 object: Settings.AutoBridge,
                 property: "m",
