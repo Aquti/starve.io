@@ -1951,6 +1951,12 @@
       "https://raw.githubusercontent.com/XmreLoux/images/main/blizzard.png");
   let Spectator,
     Settings = {
+      FullAuto: {
+          e: false,
+          t: false,
+          k: "KeyN",
+          a: null
+      },
       AutoFire: {
         e: false,
         k: "BracketRight"
@@ -62366,8 +62372,22 @@
           e.Register({ type: "folder", label: "PathFinder", open: !1 }),
           e.Register({ type: "folder", label: "AutoSteal", open: !1 }),
           e.Register({ type: "folder", label: "AutoSpike", open: !1 }),
+          e.Register({ type: "folder", label: "PvP Assistant", open: !1 }),
           e.Register({ type: "folder", label: "AutoCraft&Recycle", open: !1 }),
           e.Register({ type: "folder", label: "Token", open: !1 }),
+          e.Register(
+            [
+              {
+                type: "checkbox",
+                label: "Auto PVP (Full Auto)",
+                object: Settings,
+                property: "FullAuto",
+                onChange: (e) => {
+                  Utils.saveSettings();
+                }
+              }
+            ]
+          )
           e.Register(
             [
               {
@@ -92113,10 +92133,58 @@
           }
           e || (Settings.AutoTame.a = null);
         }
+        if (Settings.FullAuto) {
+          let _ctx =  document.createElement("canvas").getContext("2d");
+          if (!Settings.FullAuto.t) {
+            let e = EnemyToAttack(d, p.U$[u.O$Q]);
+            switch (HoldWeapon(d.right, !0)) {
+              case 1:
+                var n = d.OO$ ? 196.8 : 157.6;
+                break;
+              case 2:
+                n = d.OO$ ? 291.8 : 227.6;
+                break;
+              case 3:
+                n = 620;
+                break;
+              case 4:
+                n = d.OO$ ? 140 : 125;
+                break;
+              case 5:
+                if (d.QWO == window.e.wo$ || d.QWO == window.e.Qv$) n = d.OO$ ? 120.8 : 97.6;
+                else Settings.FullAuto.a = false;
+                break;
+              default:
+                Settings.FullAuto.a = false;
+            }
+            if (n && a) {
+              const dist = dist2dSQRT(d, e);
+              if (o <= n) {
+                Settings.FullAuto.t = e;
+              }
+            }
+          }
+          if (Settings.FullAuto.t) {
+            if (dist2dSQRT(d, Settings.FullAuto.t) > 800) {
+              Settings.FullAuto.t = false;
+            }
+            if (Settings.FullAuto.t) {
+              _ctx.save();
+              _ctx.lineWidth = 2.6;
+              _ctx.beginPath();
+              _ctx.moveTo(m.o0.x + d.x, m.o0.y + d.y);
+              _ctx.lineTo(m.o0.x + Settings.FullAuto.t.x, m.o0.y + SEttings.FullAuto.t.y);
+              _ctx.strokeStyle = "yellow";
+              _ctx.stroke();
+              _ctx.restore();
+            }
+          }
+        }
         if (Settings.AutoFire.e) {
           const TimeLeftForCold = parseInt((6 - (Date.now() - TimerTools.GaugeTimer) / 1e3));
           const HasFire = m.UQ.oV[107]; const HasBook = m.UQ.oV[28]; const HasSpace = Boolean(m.UQ.max - m.UQ.VVo.length);
           const isInFire = p.U$[1].some(fire => { const dist = dist2dSQRT(p.$Vu[m.vUU], fire); return dist < 200; });
+          const HasWeapon = (HoldWeapon(d.right, !1) == 2 || HoldWeapon(d.right, !1) == 3 || HoldWeapon(d.right, !1) == 2  || HoldWeapon(d.right, !1) == 1);
           const ColdBar = (m.uUw.c * 100);
           let e = 2 * Math.PI;
 
@@ -92139,7 +92207,7 @@
                 }
             }, 500)
             }
-          } else if (!HasFire && HasSpace && HasBook) {
+          } else if (!HasWeapon && !HasFire && HasSpace && HasBook) {
             const CanCraftFire = m.ww.QoW.some(item => item.id === 0);
             if (CanCraftFire && Date.now() - lastFireCraft > 3000) {
               vw.$_WUu(0);
