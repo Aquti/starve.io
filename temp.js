@@ -61439,6 +61439,8 @@
               (Settings.AutoRes.e = !Settings.AutoRes.e),
             e.code === Settings.Aimbot.k &&
               (Settings.Aimbot.e = !Settings.Aimbot.e),
+            e.code === Settings.FullAuto.k &&
+              (Settings.FullAuto.e = !Settings.FullAuto.e),
             e.code === Settings.AutoFire.k &&
               (Settings.AutoFire.e = !Settings.AutoFire.e),
             e.code === Settings.AutoTame.k &&
@@ -62827,6 +62829,19 @@
                 type: "display",
                 label: "Aimbot Key:",
                 object: Settings.Aimbot,
+                property: "k",
+              },
+              {
+                type: "button",
+                label: "Set AutoPVP Key",
+                action: (e) => {
+                  Utils.controls.setKeyBind("FullAuto");
+                },
+              },
+              {
+                type: "display",
+                label: "AutoPvP Key:",
+                object: Settings.FullAuto,
                 property: "k",
               },
               {
