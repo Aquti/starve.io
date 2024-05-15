@@ -1941,7 +1941,8 @@
       location.reload()
     }
   }
-  let AutoRespawnInterval,
+  let AutoRespawnInterval
+  let lastFireCraft = Date.now(),
     SandStormImage = new Image(),
     BlizzardImage = new Image();
   (SandStormImage.src =
@@ -92113,13 +92114,13 @@
           e || (Settings.AutoTame.a = null);
         }
         if (Settings.AutoFire.e) {
-          const TimeLeftForCold = parseInt(~~(6 - (Date.now() - TimerTools.GaugeTimer) / 1e3));
+          const TimeLeftForCold = parseInt((6 - (Date.now() - TimerTools.GaugeTimer) / 1e3));
           const HasFire = m.UQ.oV[107]; const HasBook = m.UQ.oV[28]; const HasSpace = Boolean(m.UQ.max - m.UQ.VVo.length);
           const isInFire = p.U$[1].some(fire => { const dist = dist2dSQRT(p.$Vu[m.vUU], fire); return dist < 200; });
           const ColdBar = (m.uUw.c * 100);
           let e = 2 * Math.PI;
 
-          if (!isInFire && HasFire && ColdBar <= 45 && TimeLeftForCold <= 1 && TimeLeftForCold >= 0.5) {
+          if (!isInFire && HasFire && ColdBar <= 45 && TimeLeftForCold <= 0.5) {
             let AngleToPlace = Q0.vUW0W({ x: m.o0.x + d.x, y: m.o0.y + d.y }, { x: m.o0.x + d.r.x, y: m.o0.y + d.r.y });
             if (isNaN(AngleToPlace)) {
               for (let e = 0; e < 255; e += 20) {
@@ -92137,8 +92138,9 @@
             }
           } else if (!HasFire && HasSpace && HasBook) {
             const CanCraftFire = m.ww.QoW.some(item => item.id === 0);
-            if (CanCraftFire) {
+            if (CanCraftFire && Date.now() - lastFireCraft > 3000) {
               vw.$_WUu(0);
+              lastFireCraft = Date.now()
             }
           }      
         }
