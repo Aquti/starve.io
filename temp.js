@@ -92128,7 +92128,7 @@
                   vw.oOW.send(JSON.stringify([10, 107, e % 255, 0]));
                   vw.oOW.send(JSON.stringify([10, 107, e % 255, 0]));
                 }
-
+              }, 500)
             }
             if (!isNaN(AngleToPlace)) {
               const _255Angle = Math.floor((((AngleToPlace + e / 2) % e) * 255) / e);
