@@ -92143,7 +92143,7 @@
               _ctx.lineWidth = 2.6;
               _ctx.beginPath();
               _ctx.moveTo(m.o0.x + d.x, m.o0.y + d.y);
-              _ctx.lineTo(m.o0.x + Settings.FullAuto.t.x, m.o0.y + SEttings.FullAuto.t.y);
+              _ctx.lineTo(m.o0.x + e.x, m.o0.y + e.y);
               _ctx.strokeStyle = "yellow";
               _ctx.stroke();
               _ctx.restore();
