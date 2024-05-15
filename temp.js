@@ -92157,11 +92157,11 @@
                 var n = d.OO$ ? 196.8 : 157.6;
                 break;
               default:
-                var n = 160;
+                var n = 150;
             }
             if (n) {
               const dist = dist2dSQRT(d, e);
-              if (o <= n) {
+              if (dist <= n) {
                 Settings.FullAuto.t = e;
               }
             }
