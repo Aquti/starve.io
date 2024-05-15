@@ -92159,8 +92159,8 @@
               default:
                 var n = 150;
             }
-            if (n) {
-              const dist = dist2dSQRT(d, e);
+            if (n && window.FullAutoEnemy ) {
+              const dist = dist2dSQRT(d, window.FullAutoEnemy );
               if (dist <= n) {
                 Settings.FullAuto.t = e;
               }
