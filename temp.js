@@ -92211,9 +92211,11 @@
                               break;
                       }
                       vw.oOW.send(JSON.stringify([2, direction]));
-                      if (dist >= 50 && dist <= 140) {
+                      if (dist >= 50 && dist <= 180) {
+                        Settings.AutoSpike.e = true;
                         Settings.AutoSpike.s = true;
                       } else {
+                        Settings.AutoSpike.e = false;
                         Settings.AutoSpike.s = false;
                       }
                       Settings.Aimbot.e = true;
