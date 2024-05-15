@@ -92126,7 +92126,7 @@
           let e = 2 * Math.PI;
 
           switch (true) {
-            case HasFire && ColdBar <= 25 && TimeLeftForCold <= 1 && TimeLeftForCold >= 0.5:
+            case HasFire && ColdBar <= 35 && TimeLeftForCold <= 1 && TimeLeftForCold >= 0.5:
               let AngleToPlace = Q0.vUW0W({ x: m.o0.x + d.x, y: m.o0.y + d.y } , { x: m.o0.x + d.r.x, y: m.o0.y + d.r.y } );
               if (isNaN(AngleToPlace)) {
                 for (let e = 0; e < 255; e += 20) {
