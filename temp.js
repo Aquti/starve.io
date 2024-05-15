@@ -50916,7 +50916,7 @@
                   this.angle = angle;
               }
           }
-          if (!m.QO_.open && !m.uWv.open && !Settings.PathFinder.e) {
+          if (!m.QO_.open && !m.uWv.open && !Settings.PathFinder.e && !Settings.FullAuto.e) {
               var flag = 0;
               Ya.Q0UQW() && (flag |= 1);
               Ya.OoVwv() && (flag |= 2);
