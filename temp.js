@@ -61418,6 +61418,8 @@
               (Settings.AutoRes.e = !Settings.AutoRes.e),
             e.code === Settings.Aimbot.k &&
               (Settings.Aimbot.e = !Settings.Aimbot.e),
+            e.code === Settings.AutoFire.k &&
+              (Settings.AutoFire.e = !Settings.AutoFire.e),
             e.code === Settings.AutoTame.k &&
               (Settings.AutoTame.e = !Settings.AutoTame.e),
             e.code === Settings.AutoExtTake.k &&
