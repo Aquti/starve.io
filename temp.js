@@ -62380,13 +62380,14 @@
               {
                 type: "checkbox",
                 label: "Auto PVP (Full Auto)",
-                object: Settings,
-                property: "FullAuto",
+                object: Settings.FullAuto,
+                property: "e",
                 onChange: (e) => {
                   Utils.saveSettings();
                 }
               }
-            ]
+            ], 
+            { folder: "PvP Assistant" }
           )
           e.Register(
             [
@@ -92133,8 +92134,8 @@
           }
           e || (Settings.AutoTame.a = null);
         }
-        if (Settings.FullAuto) {
-          let _ctx =  document.createElement("canvas").getContext("2d");
+        if (Settings.FullAuto.e) {
+          let _ctx = document.createElement("canvas").getContext("2d");
           if (!Settings.FullAuto.t) {
             let e = EnemyToAttack(d, p.U$[u.O$Q]);
             switch (HoldWeapon(d.right, !0)) {
