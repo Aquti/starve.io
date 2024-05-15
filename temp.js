@@ -92145,7 +92145,7 @@
           } else if (!HasFire && HasSpace && HasBook) {
             const CanCraftFire = m.ww.QoW.some(item => item.id === 0);
             if (CanCraftFire) {
-              vw.oOW.send(JSON.stringify([7, 0]));
+              vw.$_WUu(0);
             }
           }      
         }
