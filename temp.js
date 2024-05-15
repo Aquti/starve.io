@@ -92176,8 +92176,7 @@
                       Settings.Aimbot.e = false;
                   }
               }
-          }
-      }      
+          }     
           if (!Settings.FullAuto.t) {
               let e = window.FullAutoEnemy = EnemyToAttack(d, p.U$[u.O$Q]);
               let n = d.right === 1 ? (d.OO$ ? 196.8 : 157.6) : 150;
@@ -92234,8 +92233,8 @@
                   }
               }
           }
-      }
-      
+        }
+
         if (Settings.AutoFire.e) {
           const TimeLeftForCold = parseInt((6 - (Date.now() - TimerTools.GaugeTimer) / 1e3));
           const HasFire = m.UQ.oV[107]; const HasBook = m.UQ.oV[28]; const HasSpace = Boolean(m.UQ.max - m.UQ.VVo.length);
