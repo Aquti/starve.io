@@ -1950,6 +1950,10 @@
       "https://raw.githubusercontent.com/XmreLoux/images/main/blizzard.png");
   let Spectator,
     Settings = {
+      AutoFire: {
+        e: false,
+        key: "BracketRight"
+      },
       AutoSpikeMode: {
         type: true,
         key: "KeyC"
@@ -62917,11 +62921,33 @@
                 object: Settings.DropSword,
                 property: "k",
               },
+              {
+                type: "button",
+                label: "Set AutoFire Key",
+                action: (e) => {
+                  Utils.controls.setKeyBind("AutoFire");
+                },
+              },
+              {
+                type: "display",
+                label: "AutoFire Key:",
+                object: Settings.AutoFire,
+                property: "key",
+              },
             ],
             { folder: "Binds" }
           ),
           e.Register(
             [
+              {
+                type: "checkbox",
+                label: "Auto FireWalk",
+                object: Settings.AutoFire,
+                propety: "e",
+                onChange: (e) => {
+                  Utils.saveSettings();
+                }
+              },
               {
                 type: "checkbox",
                 label: "Autobridge with G mode",
@@ -92093,6 +92119,30 @@
           }
           e || (Settings.AutoTame.a = null);
         }
+        if (Settings.AutoFire.e) {
+          const TimeLeftForCold = parseInt(~~(6 - (Date.now() - TimerTools.GaugeTimer) / 1e3));
+          const HasFire = m.UQ.oV[107]; const HasBook = m.UQ.oV[28]; const HasSpace = m.UQ.VVo.length - m.UQ.max;
+          let e = 2 * Math.PI;
+
+          switch (true) {
+            case HasFire && TimeLeftForCold <= 1 && TimeLeftForCold >= 0.5:
+              const AngleToPlace = Q0.vUW0W({ x: m.o0.x + d.x, y: m.o0.y + d.y } , { x: m.o0.x + d.r.x, y: m.o0.y + d.r.y } );
+              const _255Angle = Math.floor((((AngleToPlace+ e) % e) * 255) / e);
+              for (let e = 0; e < 32; e += 4) {
+                vw.oOW.send(JSON.stringify([10, i, (e + _255Angle) % 255, 0]))
+                vw.oOW.send(JSON.stringify([10, i, (_255Angle - e + 255) % 255, 0]));
+              }
+              break;
+            case !HasFire && HasSpace && HasBook:
+              const CanCraftFire = m.ww.QoW.some(item => item.id === 0);
+              if (CanCraftFire) {
+                vw.oOW.send(JSON.stringify([7, 0]))
+              }
+              break;
+            default:
+              break;
+          }          
+        }
         if (Settings.AutoSpike.e) {
           for (let e = 0, t = Settings.AutoSpike.p; e < t.length; e++) {
             var o = t[e];
@@ -92143,8 +92193,8 @@
               }
               if (enemies.length == 1) {
                 const EnemyToAttack = enemies[0];
-                const _x = ((EnemyToAttack.x + 1 * (EnemyToAttack.r.x - EnemyToAttack.x)) - EnemyToAttack.x) + EnemyToAttack.r.x
-                const _y = ((EnemyToAttack.y + 1 * (EnemyToAttack.r.y - EnemyToAttack.y)) - EnemyToAttack.y) + EnemyToAttack.r.y
+                const _x = ((EnemyToAttack.x + 0.6 * (EnemyToAttack.r.x - EnemyToAttack.x)) - EnemyToAttack.x) + EnemyToAttack.r.x
+                const _y = ((EnemyToAttack.y + 0.6 * (EnemyToAttack.r.y - EnemyToAttack.y)) - EnemyToAttack.y) + EnemyToAttack.r.y
                 const AngleToEnemy = Q0.vUW0W( { x: m.o0.x + _x, y: m.o0.y + _y } , { x: m.o0.x + d.x, y: m.o0.y + d.y } );
                 const _255Angle = Math.floor((((AngleToEnemy + e) % e) * 255) / e);
                 for (let e = 0; e < 31; e += 4) {
