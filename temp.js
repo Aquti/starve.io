@@ -61261,6 +61261,9 @@
           }
         }
         if (Settings.FullAuto.e && window.FullAutoEnemy) {
+          if (Settings.FullAuto.t) {
+            window.FullAutoEnemy = Settings.FullAuto.t;
+          }
           let e = p.$Vu[m.vUU];
           l.save();
           l.lineWidth = 2.6;
@@ -92169,7 +92172,7 @@
               default:
                 Settings.FullAuto.a = false;
             }
-            if (n && a) {
+            if (n) {
               const dist = dist2dSQRT(d, e);
               if (o <= n) {
                 Settings.FullAuto.t = e;
@@ -92181,6 +92184,20 @@
               Settings.FullAuto.t = false;
             }
             if (Settings.FullAuto.t) {
+              const Swords = [63, 62, 19, 30, 9, 6, 5, 0, 57];
+              const dist = dist2dSQRT(d, e);
+
+              if (o <= 150) {
+                if (!Swords.includes(d.right)){
+                  for (let i = 0; i < Swords.length; i++) {
+                    vw.oOW.send(JSON.stringify([5, Swords[i]]));
+                  }
+                }
+                Settings.Aimbot.e = true;
+              }
+              if (o >= 200) {
+                Settings.Aimbot.e = false;
+              }
             }
           }
         }
