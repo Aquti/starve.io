@@ -50916,7 +50916,7 @@
                   this.angle = angle;
               }
           }
-          if (!m.QO_.open && !m.uWv.open && !Settings.PathFinder.e && !Settings.FullAuto.e) {
+          if (!m.QO_.open && !m.uWv.open && !Settings.PathFinder.e) {
               var flag = 0;
               Ya.Q0UQW() && (flag |= 1);
               Ya.OoVwv() && (flag |= 2);
@@ -62401,7 +62401,20 @@
                 onChange: (e) => {
                   Utils.saveSettings();
                 }
-              }
+              },
+              {
+                type: "button",
+                label: "Set AutoPVP Key",
+                action: (e) => {
+                  Utils.controls.setKeyBind("FullAuto");
+                },
+              },
+              {
+                type: "display",
+                label: "AutoPvP Key:",
+                object: Settings.FullAuto,
+                property: "k",
+              },
             ], 
             { folder: "PvP Assistant" }
           )
@@ -62829,19 +62842,6 @@
                 type: "display",
                 label: "Aimbot Key:",
                 object: Settings.Aimbot,
-                property: "k",
-              },
-              {
-                type: "button",
-                label: "Set AutoPVP Key",
-                action: (e) => {
-                  Utils.controls.setKeyBind("FullAuto");
-                },
-              },
-              {
-                type: "display",
-                label: "AutoPvP Key:",
-                object: Settings.FullAuto,
                 property: "k",
               },
               {
