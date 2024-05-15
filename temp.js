@@ -92149,51 +92149,93 @@
           e || (Settings.AutoTame.a = null);
         }
         if (Settings.FullAuto.e) {
-          let _ctx = document.createElement("canvas").getContext("2d");
           if (!Settings.FullAuto.t) {
-            let e = window.FullAutoEnemy = EnemyToAttack(d, p.U$[u.O$Q]);
-            switch (HoldWeapon(d.right, !0)) {
-              case 1:
-                var n = d.OO$ ? 196.8 : 157.6;
-                break;
-              default:
-                var n = 150;
-            }
-            if (n && window.FullAutoEnemy ) {
-              const dist = dist2dSQRT(d, window.FullAutoEnemy );
-              if (dist <= n) {
-                Settings.FullAuto.t = e;
+              let e = window.FullAutoEnemy = EnemyToAttack(d, p.U$[u.O$Q]);
+              let n = d.right === 1 ? (d.OO$ ? 196.8 : 157.6) : 150;
+              if (n && window.FullAutoEnemy && dist2dSQRT(d, window.FullAutoEnemy) <= n) {
+                  Settings.FullAuto.t = e;
               }
-            }
           }
           if (Settings.FullAuto.t) {
-            let e = p.U$[u.O$Q].indexOf(Settings.FullAuto.t);
-            if (e === -1) {
-                Settings.FullAuto.t = false;
-            }            
-          }
-          if (Settings.FullAuto.t) {
-            if (dist2dSQRT(d, Settings.FullAuto.t) > 800) {
-              Settings.FullAuto.t = false;
-            }
-            if (Settings.FullAuto.t) {
-              const Swords = [63, 62, 19, 30, 9, 6, 5, 0, 57];
-              const dist = dist2dSQRT(d, window.FullAutoEnemy);
-
-              if (dist <= 150) {
-                if (!Swords.includes(d.right)){
-                  for (let i = 0; i < Swords.length; i++) {
-                    vw.oOW.send(JSON.stringify([5, Swords[i]]));
+              if (p.U$[u.O$Q].indexOf(Settings.FullAuto.t) === -1) {
+                  Settings.FullAuto.t = false;
+                  Settings.Aimbot.e = false;
+              }
+              if (dist2dSQRT(d, Settings.FullAuto.t) > 800) {
+                  Settings.FullAuto.t = false;
+              }
+              if (Settings.FullAuto.t) {
+                  const Swords = [63, 62, 19, 30, 9, 6, 5, 0, 57];
+                  const dist = dist2dSQRT(d, window.FullAutoEnemy);
+                  if (dist <= 180) {
+                      if(!Swords.includes(d.right)) Swords.forEach(sword => vw.oOW.send(JSON.stringify([5, sword])));
+                      const AngleToEnemy = Q0.vUW0W()
+                      Settings.Aimbot.e = true;
                   }
-                }
-                Settings.Aimbot.e = true;
+                  if (dist >= 200) {
+                      Settings.Aimbot.e = false;
+                  }
               }
-              if (dist >= 200) {
-                Settings.Aimbot.e = false;
-              }
-            }
           }
-        }
+      }      
+          if (!Settings.FullAuto.t) {
+              let e = window.FullAutoEnemy = EnemyToAttack(d, p.U$[u.O$Q]);
+              let n = d.right === 1 ? (d.OO$ ? 196.8 : 157.6) : 150;
+              if (n && window.FullAutoEnemy && dist2dSQRT(d, window.FullAutoEnemy) <= n) {
+                  Settings.FullAuto.t = e;
+              }
+          }
+          if (Settings.FullAuto.t) {
+              if (p.U$[u.O$Q].indexOf(Settings.FullAuto.t) === -1) {
+                  Settings.FullAuto.t = false;
+                  Settings.Aimbot.e = false;
+              }
+              if (dist2dSQRT(d, Settings.FullAuto.t) > 800) {
+                  Settings.FullAuto.t = false;
+              }
+              if (Settings.FullAuto.t) {
+                  const Swords = [63, 62, 19, 30, 9, 6, 5, 0, 57];
+                  const dist = dist2dSQRT(d, window.FullAutoEnemy);
+                  if (dist <= 150 && !Swords.includes(d.right)) {
+                      Swords.forEach(sword => vw.oOW.send(JSON.stringify([5, sword])));
+                      const angle = Math.floor((((Q0.vUW0W(target, d) + Math.PI) % (2 * Math.PI)) * 255) / (2 * Math.PI));
+                      let direction;
+                      switch (true) {
+                        case (angle <= 220 && angle >= 170):
+                            direction = "top";
+                            break;
+                        case (angle > 220 && angle <= 240):
+                            direction = "top right";
+                            break;
+                        case (angle > 240 || angle < 20):
+                            direction = "right";
+                            break;
+                        case (angle > 20 && angle <= 40):
+                            direction = "bottom right";
+                            break;
+                        case (angle > 40 && angle <= 80):
+                            direction = "bottom";
+                            break;
+                        case (angle > 80 && angle <= 110):
+                            direction = "bottom left";
+                            break;
+                        case (angle > 110 && angle <= 140):
+                            direction = "left";
+                            break;
+                        case (angle > 140 && angle < 170):
+                            direction = "top left";
+                            break;
+                    }
+                      console.log(direction)
+                      Settings.Aimbot.e = true;
+                  }
+                  if (dist >= 200) {
+                      Settings.Aimbot.e = false;
+                  }
+              }
+          }
+      }
+      
         if (Settings.AutoFire.e) {
           const TimeLeftForCold = parseInt((6 - (Date.now() - TimerTools.GaugeTimer) / 1e3));
           const HasFire = m.UQ.oV[107]; const HasBook = m.UQ.oV[28]; const HasSpace = Boolean(m.UQ.max - m.UQ.VVo.length);
@@ -92224,10 +92266,10 @@
           } else if (!HasWeapon && !HasFire && HasSpace && HasBook) {
             const CanCraftFire = m.ww.QoW.some(item => item.id === 0);
             if (CanCraftFire && Date.now() - lastFireCraft > 3000) {
-              vw.$_WUu(0);
+               vw.$_WUu(0);
               lastFireCraft = Date.now()
             }
-          }      
+          }     
         }
         if (Settings.AutoSpike.e) {
           for (let e = 0, t = Settings.AutoSpike.p; e < t.length; e++) {
