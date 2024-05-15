@@ -1952,7 +1952,7 @@
     Settings = {
       AutoFire: {
         e: false,
-        key: "BracketRight"
+        k: "BracketRight"
       },
       AutoSpikeMode: {
         type: true,
@@ -62932,7 +62932,7 @@
                 type: "display",
                 label: "AutoFire Key:",
                 object: Settings.AutoFire,
-                property: "key",
+                property: "k",
               },
             ],
             { folder: "Binds" }
