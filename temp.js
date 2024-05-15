@@ -92174,7 +92174,7 @@
               const Swords = [63, 62, 19, 30, 9, 6, 5, 0, 57];
               const dist = dist2dSQRT(d, window.FullAutoEnemy);
 
-              if (o <= 150) {
+              if (dist <= 150) {
                 if (!Swords.includes(d.right)){
                   for (let i = 0; i < Swords.length; i++) {
                     vw.oOW.send(JSON.stringify([5, Swords[i]]));
@@ -92182,7 +92182,7 @@
                 }
                 Settings.Aimbot.e = true;
               }
-              if (o >= 200) {
+              if (dist >= 200) {
                 Settings.Aimbot.e = false;
               }
             }
