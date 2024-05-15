@@ -92121,12 +92121,13 @@
         }
         if (Settings.AutoFire.e) {
           const TimeLeftForCold = parseInt(~~(6 - (Date.now() - TimerTools.GaugeTimer) / 1e3));
-          const HasFire = m.UQ.oV[107]; const HasBook = m.UQ.oV[28]; const HasSpace = m.UQ.max - m.UQ.VVo.length;
+          const HasFire = m.UQ.oV[107]; const HasBook = m.UQ.oV[28]; const HasSpace = Boolean(m.UQ.max - m.UQ.VVo.length);
+          const isInFire = p.U$[1].some(fire => { const dist = dist2dSQRT(p.$Vu[m.vUU], fire); return dist < 200; });
           const ColdBar = (m.uUw.c * 100);
           let e = 2 * Math.PI;
 
           switch (true) {
-            case HasFire && ColdBar <= 35 && TimeLeftForCold <= 1 && TimeLeftForCold >= 0.5:
+            case !isInFire && HasFire && ColdBar <= 45 && TimeLeftForCold <= 1 && TimeLeftForCold >= 0.5:
               let AngleToPlace = Q0.vUW0W({ x: m.o0.x + d.x, y: m.o0.y + d.y } , { x: m.o0.x + d.r.x, y: m.o0.y + d.r.y } );
               if (isNaN(AngleToPlace)) {
                 for (let e = 0; e < 255; e += 20) {
@@ -92135,7 +92136,8 @@
                 }
               }
               if (!isNaN(AngleToPlace)) {
-                const _255Angle = Math.floor((((AngleToPlace+ e) % e) * 255) / e);
+                const _255Angle = Math.floor((((AngleToPlace + e / 2) % e) * 255) / e);
+
                 for (let e = 0; e < 32; e += 4) {
                   vw.oOW.send(JSON.stringify([10, 107, (e + _255Angle) % 255, 0]))
                   vw.oOW.send(JSON.stringify([10, 107, (_255Angle - e + 255) % 255, 0]));
