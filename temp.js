@@ -92138,6 +92138,16 @@
           let _ctx = document.createElement("canvas").getContext("2d");
           if (!Settings.FullAuto.t) {
             let e = EnemyToAttack(d, p.U$[u.O$Q]);
+            if (e) {
+              _ctx.save();
+              _ctx.lineWidth = 2.6;
+              _ctx.beginPath();
+              _ctx.moveTo(m.o0.x + d.x, m.o0.y + d.y);
+              _ctx.lineTo(m.o0.x + Settings.FullAuto.t.x, m.o0.y + SEttings.FullAuto.t.y);
+              _ctx.strokeStyle = "yellow";
+              _ctx.stroke();
+              _ctx.restore();
+            }
             switch (HoldWeapon(d.right, !0)) {
               case 1:
                 var n = d.OO$ ? 196.8 : 157.6;
@@ -92170,14 +92180,6 @@
               Settings.FullAuto.t = false;
             }
             if (Settings.FullAuto.t) {
-              _ctx.save();
-              _ctx.lineWidth = 2.6;
-              _ctx.beginPath();
-              _ctx.moveTo(m.o0.x + d.x, m.o0.y + d.y);
-              _ctx.lineTo(m.o0.x + Settings.FullAuto.t.x, m.o0.y + SEttings.FullAuto.t.y);
-              _ctx.strokeStyle = "yellow";
-              _ctx.stroke();
-              _ctx.restore();
             }
           }
         }
