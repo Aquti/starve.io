@@ -61261,10 +61261,11 @@
           }
         }
         if (Settings.FullAuto.e && window.FullAutoEnemy) {
+          let e = p.$Vu[m.vUU];
           l.save();
           l.lineWidth = 2.6;
           l.beginPath();
-          l.moveTo(m.o0.x + d.x, m.o0.y + d.y);
+          l.moveTo(m.o0.x + e.x, m.o0.y + e.y);
           l.lineTo(m.o0.x + window.FullAutoEnemy.x, m.o0.y + window.FullAutoEnemy.y);
           l.strokeStyle = "yellow";
           l.stroke();
