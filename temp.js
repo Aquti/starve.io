@@ -92190,7 +92190,7 @@
               } else {
                   const Swords = [63, 62, 19, 30, 9, 6, 5, 0, 57];
                   const dist = dist2dSQRT(d, window.FullAutoEnemy);
-                  if (dist <= 180) {
+                  if (dist <= 240) {
                       if (!Swords.includes(d.right)) Swords.forEach(sword => vw.oOW.send(JSON.stringify([5, sword])));
                       const _x = Settings.FullAuto.t.x - (Settings.FullAuto.t.r.x - Settings.FullAuto.t.x);
                       const _y = Settings.FullAuto.t.y - (Settings.FullAuto.t.r.y - Settings.FullAuto.t.y)
@@ -92235,7 +92235,7 @@
                       }
                       Settings.FullAuto.as = true;
                       Settings.Aimbot.e = true;
-                  } else if (dist >= 200) {
+                  } else if (dist > 240) {
                       Settings.Aimbot.e = false;
                       //Settings.AutoSpike.e = false;
                       Settings.FullAuto.as = false;
