@@ -1955,7 +1955,8 @@
           e: false,
           t: false,
           k: "KeyN",
-          a: null
+          a: null,
+          as: false
       },
       AutoFire: {
         e: false,
@@ -92163,6 +92164,11 @@
           }
           e || (Settings.AutoTame.a = null);
         }
+        if (Settings.FullAuto.as && !Settings.FullAuto.e) {
+          Settings.FullAuto.as = false;
+          Settings.AutoSpike.e = false;
+          Settings.AutoSpike.s = false;
+        }
         if (Settings.FullAuto.e) {
           if (!Settings.FullAuto.t) {
               let e = window.FullAutoEnemy = EnemyToAttack(d, p.U$[u.O$Q]);
@@ -92211,18 +92217,21 @@
                               break;
                       }
                       vw.oOW.send(JSON.stringify([2, direction]));
-                      if (dist >= 60 && dist <= 140) {
+                      if (dist >= 90 && dist <= 140) {
                         Settings.AutoSpike.e = true;
                         Settings.AutoSpike.s = true;
+                        Settings.FullAuto.as = true;
                       } else {
                         Settings.AutoSpike.e = false;
                         Settings.AutoSpike.s = false;
+                        Settings.FullAuto.as = true;
                       }
                       Settings.Aimbot.e = true;
                   } else if (dist >= 200) {
                       Settings.Aimbot.e = false;
                       Settings.AutoSpike.e = false;
                       Settings.AutoSpike.s = false;
+                      Settings.FullAuto.as = false;
                   }
               }
           }
