@@ -1956,7 +1956,8 @@
           t: false,
           k: "KeyN",
           a: null,
-          as: false
+          as: false,
+          l: false,
       },
       AutoFire: {
         e: false,
@@ -92216,7 +92217,13 @@
                               direction = 6;
                               break;
                       }
-                      vw.oOW.send(JSON.stringify([2, direction]));
+                      if ((Math.floor(Math.random() * 100)) > 50) {
+                        vw.oOW.send(JSON.stringify([2, 0]));
+                      }
+                      if (Settings.FullAuto.l != direction) {
+                        vw.oOW.send(JSON.stringify([2, direction]));
+                      }
+                      Settings.FullAuto.l = direction;
                       if (dist >= 90 && dist <= 140) {
                         Settings.AutoSpike.e = true;
                         Settings.AutoSpike.s = true;
