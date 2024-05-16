@@ -92188,7 +92188,7 @@
                   const dist = dist2dSQRT(d, window.FullAutoEnemy);
                   if (dist <= 180) {
                       if (!Swords.includes(d.right)) Swords.forEach(sword => vw.oOW.send(JSON.stringify([5, sword])));
-                      const angle = Math.floor((((Q0.vUW0W(Settings.FullAuto.t, d) + Math.PI) % (2 * Math.PI)) * 255) / (2 * Math.PI));
+                      const angle = Math.floor((((Q0.vUW0W({x: Settings.FullAuto.t.r.x, y: Settings.FullAuto.t.r.y}, d) + Math.PI) % (2 * Math.PI)) * 255) / (2 * Math.PI));
                       let direction;
                       switch (true) {
                           case (angle <= 220 && angle >= 170):
