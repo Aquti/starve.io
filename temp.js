@@ -92172,8 +92172,8 @@
           //Settings.AutoSpike.s = false;
         }
         if (Settings.FullAuto.asa && !Settings.FullAuto.e) {
-          Settings.FullAuto.asa = false;
-          Settings.AutoSpike.e = false;
+          //Settings.FullAuto.asa = false;
+          //Settings.AutoSpike.e = false;
         }
         if (!Settings.FullAuto.e && Settings.FullAuto.t) {
           Settings.FullAuto.t = false;
@@ -92232,11 +92232,11 @@
                       }
                       Settings.FullAuto.l = direction;
                       if (dist >= 90 && dist <= 140) {
-                        Settings.AutoSpike.e = true;
-                        Settings.FullAuto.asa = false;
+                        //Settings.AutoSpike.e = true;
+                        //Settings.FullAuto.asa = false;
                       } else {
-                        Settings.AutoSpike.e = false;
-                        Settings.FullAuto.asa = true;
+                        //Settings.AutoSpike.e = false;
+                        //Settings.FullAuto.asa = true;
                       }
                       Settings.FullAuto.as = true;
                       Settings.Aimbot.e = true;
