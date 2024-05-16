@@ -92217,7 +92217,7 @@
                               break;
                       }
                       if (Settings.FullAuto.l != direction) {
-                        vw.oOW.send(JSON.stringify([2, direction]));
+                        vw.uOQ_w(direction)
                       }
                       Settings.FullAuto.l = direction;
                       if (dist >= 90 && dist <= 140) {
