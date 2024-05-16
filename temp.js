@@ -1958,6 +1958,7 @@
           a: null,
           as: false,
           l: false,
+          asa: false
       },
       AutoFire: {
         e: false,
@@ -92170,6 +92171,10 @@
           Settings.Aimbot.e = false;
           //Settings.AutoSpike.s = false;
         }
+        if (Settings.FullAuto.asa && !Settings.FullAuto.e) {
+          Settings.FullAuto.asa = false;
+          Settings.AutoSpike.e = false;
+        }
         if (!Settings.FullAuto.e && Settings.FullAuto.t) {
           Settings.FullAuto.t = false;
         }
@@ -92190,7 +92195,7 @@
               } else {
                   const Swords = [63, 62, 19, 30, 9, 6, 5, 0, 57];
                   const dist = dist2dSQRT(d, window.FullAutoEnemy);
-                  if (dist <= 240) {
+                  if (dist <= 280) {
                       if (!Swords.includes(d.right)) Swords.forEach(sword => vw.oOW.send(JSON.stringify([5, sword])));
                       const _x = Settings.FullAuto.t.x - (Settings.FullAuto.t.r.x - Settings.FullAuto.t.x);
                       const _y = Settings.FullAuto.t.y - (Settings.FullAuto.t.r.y - Settings.FullAuto.t.y)
@@ -92227,17 +92232,16 @@
                       }
                       Settings.FullAuto.l = direction;
                       if (dist >= 90 && dist <= 140) {
-                        //Settings.AutoSpike.e = true;
-                        //Settings.FullAuto.as = false;
+                        Settings.AutoSpike.e = true;
+                        Settings.FullAuto.asa = false;
                       } else {
-                        //Settings.AutoSpike.e = false;
-                        //Settings.FullAuto.as = true;
+                        Settings.AutoSpike.e = false;
+                        Settings.FullAuto.asa = true;
                       }
                       Settings.FullAuto.as = true;
                       Settings.Aimbot.e = true;
-                  } else if (dist > 240) {
+                  } else if (dist > 280) {
                       Settings.Aimbot.e = false;
-                      //Settings.AutoSpike.e = false;
                       Settings.FullAuto.as = false;
                   }
               }
