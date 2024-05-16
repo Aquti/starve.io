@@ -92271,7 +92271,7 @@
             }
           }     
         }
-        if (Settings.AutoSpike.e) {
+        if (Settings.AutoSpike.e && !m._uV.wait) {
           for (let e = 0, t = Settings.AutoSpike.p; e < t.length; e++) {
             var o = t[e];
             switch (o) {
