@@ -92216,9 +92216,6 @@
                               direction = 6;
                               break;
                       }
-                      if ((Math.floor(Math.random() * 100)) > 50) {
-                        vw.oOW.send(JSON.stringify([2, 0]));
-                      }
                       if (Settings.FullAuto.l != direction) {
                         vw.oOW.send(JSON.stringify([2, direction]));
                       }
