@@ -91203,6 +91203,22 @@
             a.lobby.player.token;
           this.oOW = new window.WebSocket(v)
           console.group("Got Socket");
+          window.get_recaptcha_token = ()=>{
+              return new Promise((e,r)=>{
+                  window.grecaptcha.ready(function() {
+                      window.grecaptcha.execute('6LdvBaEjAAAAAIKTgdecsZBehRxhVZOIDzG9MvXg', {
+                          action: 'validate_recaptcha'
+                      }).then(function(res) {
+                          e(res);
+                      }).catch((res)=>{
+                          console.log(undefined);
+                          r(res);
+                      }
+                      );
+                  });
+              }
+              );
+          }
           this.oOW.onopen = function () {
               const _socket = this;
               clearTimeout(o.UWV),
@@ -91225,7 +91241,6 @@
                       void 0 === Ua ? 0 : Ua,
                       void 0 === Qa ? 0 : Qa.substring(Qa.length - 50),
                       Uj,
-                      "❤",
                       e,
                     ])
                   ),
@@ -91253,11 +91268,6 @@
                     break;
                   case 3:
                     o.v_ouo(e);
-                    if (skip) {
-                      setInterval(() => {
-                          socket.oOW.send(JSON.stringify([11]));
-                          }, 1);
-                    }
                     break;
                   case 4:
                     o.message(e[1]);
