@@ -534,7 +534,7 @@ function fun2_token (f2p0,f2p1) {
 
 Utils = {
 
-	get_recaptcha_token: function()=>{
+	get_recaptcha_token: function() {
         return new Promise((e,r)=>{
             window.grecaptcha.ready(function() {
                 window.grecaptcha.execute('6LdvBaEjAAAAAIKTgdecsZBehRxhVZOIDzG9MvXg', {
