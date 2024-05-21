@@ -7059,6 +7059,11 @@ IMAGES = {
 	SEASON_5_OUT : 'img/season-5-click.png',
 	SEASON5_BOX : 'img/season5-box.png',
 
+    SEASON_6 : 'img/season-6-out.png',
+	SEASON_6_IN : 'img/season-6-in.png',
+	SEASON_6_OUT : 'img/season-6-click.png',
+	SEASON6_BOX : 'img/season6-box.png',
+
 	PROFILE_BOX : 'img/profile2-box.png',
 	SKINS_BOX : 'img/skins-box.png',
 	SHOP_BOX : 'img/shop-box.png',
@@ -7125,6 +7130,10 @@ IMAGES = {
 	SEASON5_PROFILE_OUT : 'img/season5-profile-out.png',
 	SEASON5_PROFILE_IN : 'img/season5-profile-in.png',
 	SEASON5_PROFILE_CLICK : 'img/season5-profile-click.png',
+
+    SEASON6_PROFILE_OUT : 'img/season6-profile-out.png',
+	SEASON6_PROFILE_IN : 'img/season6-profile-in.png',
+	SEASON6_PROFILE_CLICK : 'img/season6-profile-click.png',
 	///COSMETICS
 	LOCKED_SKIN_ALERT : 'img/locked-skin-alert.png',
 	LOCKED_CUSTOM_ALERT : 'img/locked-custom-alert.png',
@@ -7404,6 +7413,10 @@ IMAGES = {
 	SEASON5_LEADERBOARD_OUT : 'img/season5-out.png',
 	SEASON5_LEADERBOARD_IN : 'img/season5-in.png',
 	SEASON5_LEADERBOARD_CLICK : 'img/season5-click.png',
+
+    SEASON6_LEADERBOARD_OUT : 'img/season6-out.png',
+	SEASON6_LEADERBOARD_IN : 'img/season6-in.png',
+	SEASON6_LEADERBOARD_CLICK : 'img/season6-click.png',
 	//LEADERBOARD_SOON : 'img/leaderboard-soon.png',
 
 	TOTAL_LEAD_OUT : 'img/total-lead-out.png',
@@ -56944,6 +56957,8 @@ function UI (can, ctx) {
 			this.buttons[SERVER_BUTTON].info.state = BUTTON_CLICK;
 		else if ((this.current_view & __SEASON5__) === __SEASON5__)
 			this.buttons[PROFILE_BUTTON].info.state = BUTTON_CLICK;
+		else if ((this.current_view & __SEASON6__) === __SEASON6__)
+			this.buttons[PROFILE_BUTTON].info.state = BUTTON_CLICK;
 
 		// Selected button effect for the leaderboard view
 		if ((this.current_view & __LEADERBOARD__) === __LEADERBOARD__) {
@@ -56997,6 +57012,8 @@ function UI (can, ctx) {
 				this.buttons[this.LEADERBOARD_SEASON4].info.state = BUTTON_CLICK;
 			else if (this.leaderboard_season === this.LEADERBOARD_SEASON5)
 				this.buttons[this.LEADERBOARD_SEASON5].info.state = BUTTON_CLICK;
+            else if (this.leaderboard_season === this.LEADERBOARD_SEASON6)
+				this.buttons[this.LEADERBOARD_SEASON6].info.state = BUTTON_CLICK;
 		}
 
 		// Selected button effect for the profile view
@@ -57023,6 +57040,8 @@ function UI (can, ctx) {
 				this.buttons[SCORE_MODE_SEASON4].info.state = BUTTON_CLICK;
 			else if (this.profile_season === 4)
 				this.buttons[SCORE_MODE_SEASON5].info.state = BUTTON_CLICK;
+            else if (this.profile_season === 5)
+				this.buttons[SCORE_MODE_SEASON6].info.state = BUTTON_CLICK;
 		}
 
 		// Update hint effect
@@ -57377,6 +57396,7 @@ function UI (can, ctx) {
 	var __SERVER_ACCESS__    = Math.pow (2, COUNTER++);
 	this.__SERVER_ACCESS__ = __SERVER_ACCESS__;
 	var __SEASON5__        = Math.pow (2, COUNTER++);
+    var __SEASON6__        = Math.pow (2, COUNTER++);
 
 	this.current_view = __GAME__;
 
@@ -57798,6 +57818,10 @@ function UI (can, ctx) {
 		-IMAGES.SEASON5_BOX.width / 4 - 350, -15, __TOP__ | __MIDDLE_X__);
 		this.bkgd[COUNTER++].view = __SEASON5__;
 
+    this.bkgd[COUNTER] = gui_create_image_hd (IMAGES.SEASON6_BOX, __HIDE__,
+        -IMAGES.SEASON6_BOX.width / 4 - 350, -15, __TOP__ | __MIDDLE_X__);
+        this.bkgd[COUNTER++].view = __SEASON6__; 
+          
 	this.bkgd[COUNTER] = gui_create_image_hd (IMAGES.TUTORIAL_BOX, __HIDE__,
 		-/*IMAGES.TUTORIAL_BOX.width*/1497 / 4, 110, __TOP__ | __MIDDLE_X__);
 	this.bkgd[COUNTER++].view = __TUTORIAL__;
@@ -58052,7 +58076,7 @@ function UI (can, ctx) {
 	this.buttons[LEADERBOARD_BUTTON] = gui_create_button (232, 142, "",
 		[IMAGES.ICONS_BOTTOM_BG_BUTTON_OUT, IMAGES.ICONS_BOTTOM_BG_BUTTON_IN, IMAGES.ICONS_BOTTOM_BG_BUTTON_CLICK],
 		__HD__, __NO_BREATH__, function () { select_subview (__LEADERBOARD__);
-			getLeaderboard (ui.LEADERBOARD_ALL, ui.LEADERBOARD_TOTAL, ui.LEADERBOARD_SCORE, ui.LEADERBOARD_SEASON5)}, -5, 573, __LEFT__, __DISPLAY__);
+			getLeaderboard (ui.LEADERBOARD_ALL, ui.LEADERBOARD_TOTAL, ui.LEADERBOARD_SCORE, ui.LEADERBOARD_SEASON6)}, -5, 573, __LEFT__, __DISPLAY__);
 	this.buttons[COUNTER++] = gui_create_button (236, 165, "",
 		[IMAGES.LEADERBOARD_ICON, IMAGES.LEADERBOARD_ICON, IMAGES.LEADERBOARD_ICON],
 		__HD__, __BREATH__, function () { select_subview (__LEADERBOARD__); }, -5, 566, __LEFT__, __DISPLAY__);
@@ -58541,8 +58565,8 @@ function UI (can, ctx) {
 	// Season5 leaderboard
 	this.LEADERBOARD_SEASON5 = COUNTER;
 	this.buttons[COUNTER] = gui_create_button (183, 66, "",
-		[IMAGES.SEASON5_LEADERBOARD_OUT, IMAGES.SEASON5_LEADERBOARD_IN, IMAGES.SEASON5_LEADERBOARD_CLICK],
-		__HD__, __NO_BREATH__, function () { getLeaderboard (undefined, undefined, undefined, ui.LEADERBOARD_SEASON5) }, 130, 521, __MIDDLE_X__ | __TOP__, __HIDE__);
+		[IMAGES.SEASON5_LEADERBOARD_OUT, IMAGES.SEASON6_LEADERBOARD_IN, IMAGES.SEASON6_LEADERBOARD_CLICK],
+		__HD__, __NO_BREATH__, function () { getLeaderboard (undefined, undefined, undefined, ui.LEADERBOARD_SEASON6) }, 130, 521, __MIDDLE_X__ | __TOP__, __HIDE__);
 	this.buttons[COUNTER++].view = __LEADERBOARD__;
 
 	// Currency lot 1
@@ -58620,8 +58644,8 @@ function UI (can, ctx) {
 
 	//SEASON 5
 	this.buttons[COUNTER] = gui_create_button (327, 117, "",
-		[IMAGES.SEASON_5, IMAGES.SEASON_5_IN, IMAGES.SEASON_5_OUT],
-		__HD__, __NO_BREATH__,  function () { select_subview (__SEASON5__) }, 155, 70, __LEFT__ , __DISPLAY__);
+		[IMAGES.SEASON_6, IMAGES.SEASON_6_IN, IMAGES.SEASON_6_OUT],
+		__HD__, __NO_BREATH__,  function () { select_subview (__SEASON6__) }, 155, 70, __LEFT__ , __DISPLAY__);
 	this.buttons[COUNTER++].view = __GAME__;
 
 	///Alert Locked Skin
@@ -59326,7 +59350,7 @@ function UI (can, ctx) {
 	//Season5
 	var SCORE_MODE_SEASON5 = COUNTER;
 	this.buttons[COUNTER] = gui_create_button (205, 67, "",
-		[IMAGES.SEASON5_PROFILE_OUT, IMAGES.SEASON5_PROFILE_IN, IMAGES.SEASON5_PROFILE_CLICK],
+		[IMAGES.SEASON6_PROFILE_OUT, IMAGES.SEASON6_PROFILE_IN, IMAGES.SEASON6_PROFILE_CLICK],
 		__HD__, __NO_BREATH__, function () { init_profile (undefined, 3); }, -305, 305, __MIDDLE_X__ | __TOP__, __HIDE__);
 	this.buttons[COUNTER++].view = __PROFILE__;
 
