@@ -48910,14 +48910,9 @@ function NetworkClient() {
   };
 
   this.fetch_server_list = async function () {
-    let rivetToken = await this.get_rivet_token();
-
-    // Find lobby
-    let headers = {};
-    if (rivetToken) headers["Authorization"] = `Bearer ${rivetToken}`;
     let res = await fetch(RIVET_API + "/lobbies/list", {
       method: "GET",
-      headers,
+      headers: {},
     });
     if (!res.ok) {
       console.error("Failed to list lobbies");
@@ -51376,7 +51371,6 @@ function NetworkClient() {
   this.connect_timeout = async function () {
     console.log("Connect inner");
     
-    let rivetToken = await this.get_rivet_token();
 
     let gameModeId = WORLD.RIVET_GAME_MODES[this.current_mode];
     console.log("Current game mode", gameModeId, this.current_mode);
@@ -51395,11 +51389,9 @@ function NetworkClient() {
       url = RIVET_API + "/lobbies/join";
       body = { lobby_id: selectedServer.id };
     }
-    let headers = {};
-    if (rivetToken) headers["Authorization"] = `Bearer ${rivetToken}`;
     let res = await fetch(url, {
       method: "POST",
-      headers,
+      headers: {},
       body: JSON.stringify(body)
     });
     if (!res.ok) {
