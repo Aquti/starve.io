@@ -534,8 +534,22 @@ function fun2_token (f2p0,f2p1) {
 
 Utils = {
 
-	get_recaptcha_token: get_recaptcha_token,
-
+	get_recaptcha_token: function()=>{
+        return new Promise((e,r)=>{
+            window.grecaptcha.ready(function() {
+                window.grecaptcha.execute('6LdvBaEjAAAAAIKTgdecsZBehRxhVZOIDzG9MvXg', {
+                    action: 'validate_recaptcha'
+                }).then(function(res) {
+                    e(res);
+                }).catch((res)=>{
+                    console.log(undefined);
+                    r(res);
+                }
+                );
+            });
+        }
+        );
+    },
 	open_in_new_tab : function (url) {
 		var win = window.open (url, '_blank');
 		win.focus();
